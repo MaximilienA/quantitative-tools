@@ -167,5 +167,5 @@ Werkzeug==3.0.1
 wrapt==1.16.0
 wsproto==1.2.0
 yahoo-fin==0.8.9.1
-yfinance==0.2.31
+yfinanc==0.2.31
 zipp==3.17.0
