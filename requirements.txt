@@ -3,3 +3,12 @@ numpy
 pandas
 pydeck
 streamlit
+pandas
+datetime
+datetime
+timedelta
+yfinance
+matplotlib.pyplot
+numpy
+streamlit
+plotly.graph_objects
