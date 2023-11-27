@@ -17,9 +17,6 @@ import textwrap
 
 import streamlit as st
 
-import yfinance as yf
-
-
 def show_code(demo):
     """Showing the code of the demo."""
     show_code = st.sidebar.checkbox("Show code", True)
