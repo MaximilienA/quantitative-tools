@@ -26,7 +26,7 @@ def run():
 
     st.write("# Welcome to Streamlitttttt! 👋")
 
-    st.sidebar.success("Select a demo aboveedeeeeeeeeeeeeeeeeeee.")
+    st.sidebar.success("Select a demo abo.")
 
     st.markdown(
         """
