@@ -88,14 +88,14 @@ def get_meeting_dates():
 #Récuperer l'URL et l'afficher
 # URL = get_url()
 
-raw_data_from_website_df  = get_meeting_dates()
+# raw_data_from_website_df  = get_meeting_dates()
 
-scrapped_data_from_website_df = raw_data_from_website_df
+# scrapped_data_from_website_df = raw_data_from_website_df
 
-print(scrapped_data_from_website_df.iloc[0,0], "\n") #OUTPUT : MEETING DATE 350-375 375-400 400-425 425-450 450-475 475-500 500-525 525-550 550-575 575-600
+# print(scrapped_data_from_website_df.iloc[0,0], "\n") #OUTPUT : MEETING DATE 350-375 375-400 400-425 425-450 450-475 475-500 500-525 525-550 550-575 575-600
 
 
-scrapped_data_from_website_df #OUTPUT : 
+# scrapped_data_from_website_df #OUTPUT : 
 # 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
 # 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
 # 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
@@ -300,3 +300,7 @@ increment_values = make_increment(max_value+0.25, min_value-0.25, int((max_value
 plt.gca().set_yticks(increment_values)
 
 plt.show()
+
+st.pyplot(plt)
+
+#streamlit run c:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\Selenium.py
