@@ -1,11 +1,7 @@
 #IMPORTS
-import pandas_datareader as pdr
 import pandas as pd
-import datetime as dt
 import datetime
-from datetime import timedelta 
 from datetime import date 
-import yfinance as yf   
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
@@ -16,7 +12,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import pandas as pd
-import time
 import plotly.graph_objects as go
 
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
