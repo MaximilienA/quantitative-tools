@@ -19,7 +19,7 @@ import plotly.graph_objects as go
     #Return : the URL of the targetted webpage
 def get_url():
     options = Options()
-    options.headless = True
+    # options.headless = True
 
     driver = webdriver.Chrome(options=options)
     #driver.maximize_window()
