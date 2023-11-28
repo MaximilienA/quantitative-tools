@@ -8,4 +8,3 @@ streamlit
 plotly
 matplotlib
 selenium
-pandas_datareader
