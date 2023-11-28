@@ -6,3 +6,5 @@ yfinance
 numpy
 streamlit
 plotly
+matplotlib
+selenium
