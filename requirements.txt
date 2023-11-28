@@ -2,8 +2,8 @@ pandas
 datetime
 datetime
 timedelta
-yfinance
 matplotlib.pyplot
+yfinance
 numpy
 streamlit
 plotly.graph_objects
