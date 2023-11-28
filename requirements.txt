@@ -4,4 +4,5 @@ datetime
 timedelta
 yfinance
 numpy
+matplotlib.pyplot==3.1.3
 streamlit
