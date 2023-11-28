@@ -18,13 +18,10 @@ import plotly.graph_objects as go
     #Parameters : no parameters
     #Return : the URL of the targetted webpage
 def get_url():
-    firefoxOptions = Options()
-    firefoxOptions.add_argument("--headless")
-    service = Service(GeckoDriverManager().install())
-    driver = webdriver.Firefox(
-        options=firefoxOptions,
-        service=service,
-    )
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Chrome(options=options)
     #driver.maximize_window()
 
     #OPEN FIRST URL AND GET SECOND URL
