@@ -5,3 +5,4 @@ timedelta
 yfinance
 numpy
 streamlit
+plotly
