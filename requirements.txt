@@ -2,7 +2,6 @@ pandas
 datetime
 datetime
 timedelta
-matplotlib.pyplot
 yfinance
 numpy
 streamlit
