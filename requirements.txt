@@ -4,5 +4,4 @@ datetime
 timedelta
 yfinance
 numpy
-matplotlib
 streamlit
