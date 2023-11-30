@@ -73,6 +73,7 @@ def get_url():
     #Parameters : no parameters
     #Return : a dataframe of the targetted table of the targetted URL
 def get_meeting_dates():
+    options = Options()
     options.add_argument('--headless')
 
     # service = Service(GeckoDriverManager().install())
