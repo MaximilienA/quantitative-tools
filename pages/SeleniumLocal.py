@@ -77,8 +77,8 @@ def get_url():
 #     options.add_argument('--headless')
     
 
-    URL = get_url()
-    # print(URL)
+#     URL = get_url()
+#     # print(URL)
 
 #     #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
 #     # driver_Click = webdriver.Chrome(options=options)
@@ -116,7 +116,7 @@ def get_url():
 
 #Récuperer l'URL et l'afficher
 URL = get_url()
-
+st.write(URL)
 
 
 # raw_data_from_website_df  = get_meeting_dates()
