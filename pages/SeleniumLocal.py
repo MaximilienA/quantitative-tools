@@ -77,8 +77,8 @@ def get_url():
 #     options.add_argument('--headless')
     
 
-#     URL = get_url()
-#     # print(URL)
+    URL = get_url()
+    # print(URL)
 
 #     #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
 #     # driver_Click = webdriver.Chrome(options=options)
