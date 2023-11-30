@@ -47,7 +47,7 @@ def get_url():
 
     # driver = webdriver.Firefox(options=options)
 
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(2)
     #driver.maximize_window()
 
     #OPEN FIRST URL AND GET SECOND URL
@@ -84,7 +84,7 @@ def get_meeting_dates():
 
     # driver = webdriver.Firefox(options=options)
 
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(2)
     
 
     URL = get_url()
@@ -125,7 +125,7 @@ def get_meeting_dates():
     return df
 
 #Récuperer l'URL et l'afficher
-URL = get_url()
+# URL = get_url()
 
 
 # raw_data_from_website_df  = get_meeting_dates()
