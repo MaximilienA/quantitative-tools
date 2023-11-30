@@ -26,8 +26,6 @@ def run():
 
     st.write("# Welcome to Quantitative tools!")
 
-    st.sidebar.success("Select a demo abo.")
-
     st.markdown(
         """
         Streamlit is an open-source app framework built specifically for
