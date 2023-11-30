@@ -40,10 +40,7 @@ def get_url():
     options.add_argument('--headless')
 
     service = Service(GeckoDriverManager().install())
-    driver = webdriver.Firefox(
-        options=options,
-        service=service,
-    )
+    driver = webdriver.Firefox(options=options, service=service)
 
     # driver = webdriver.Firefox(options=options)
 
