@@ -15,13 +15,16 @@ from selenium.webdriver.common.keys import Keys
 import pandas as pd
 import plotly.graph_objects as go
 from selenium import webdriver
+from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.options import Options
+from webdriver_manager.firefox import GeckoDriverManager
+
 
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
     #Parameters : no parameters
     #Return : the URL of the targetted webpage
 def get_url():
-    options = Options()
+    options = FirefoxOptions()
     # options.add_argument('--headless=new')
     # options.add_argument("--window-size=1920,1080")
     # options.add_argument("--disable-extensions")
@@ -34,7 +37,14 @@ def get_url():
     # options.add_argument('--ignore-certificate-errors')
 
     options.add_argument('--headless')
-    driver = webdriver.Firefox(options=options)
+
+    service = Service(GeckoDriverManager().install())
+    driver = webdriver.Firefox(
+        options=firefoxOptions,
+        service=service,
+    )
+
+    # driver = webdriver.Firefox(options=options)
 
     driver.implicitly_wait(5)
     #driver.maximize_window()
@@ -61,7 +71,7 @@ def get_url():
     #Parameters : no parameters
     #Return : a dataframe of the targetted table of the targetted URL
 def get_meeting_dates():
-    options = Options()
+    options = FirefoxOptions()
     options.add_argument('--headless')
     
 
@@ -103,7 +113,7 @@ def get_meeting_dates():
     return df
 
 #Récuperer l'URL et l'afficher
-# URL = get_url()
+URL = get_url()
 
 # raw_data_from_website_df  = get_meeting_dates()
 
@@ -205,7 +215,7 @@ def dfRatesMerger():
         
     return Rates_df
 
-final_df = dfRatesMerger()
+# final_df = dfRatesMerger()
 # final_df
 final_df.replace('0,0%', 0, inplace=True)
 final_df = (final_df.loc[(final_df[[final_df.columns[1]]]!= 0).all(axis=1) | (final_df[[final_df.columns[2]]]!= 0).all(axis=1) | (final_df[[final_df.columns[3]]]!= 0).all(axis=1) | (final_df[[final_df.columns[4]]]!= 0).all(axis=1) | (final_df[[final_df.columns[5]]]!= 0).all(axis=1) | (final_df[[final_df.columns[6]]]!= 0).all(axis=1) | (final_df[[final_df.columns[7]]]!= 0).all(axis=1) | (final_df[[final_df.columns[8]]]!= 0).all(axis=1) | (final_df[[final_df.columns[9]]]!= 0).all(axis=1)]).T
