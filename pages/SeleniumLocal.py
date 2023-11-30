@@ -41,7 +41,7 @@ def get_url():
 
     service = Service(GeckoDriverManager().install())
     driver = webdriver.Firefox(
-        options=firefoxOptions,
+        options=options,
         service=service,
     )
 
