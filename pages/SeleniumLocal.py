@@ -227,7 +227,7 @@ def dfRatesMerger():
         
     return Rates_df
 
-# final_df = dfRatesMerger()
+final_df = dfRatesMerger()
 # final_df
 final_df.replace('0,0%', 0, inplace=True)
 final_df = (final_df.loc[(final_df[[final_df.columns[1]]]!= 0).all(axis=1) | (final_df[[final_df.columns[2]]]!= 0).all(axis=1) | (final_df[[final_df.columns[3]]]!= 0).all(axis=1) | (final_df[[final_df.columns[4]]]!= 0).all(axis=1) | (final_df[[final_df.columns[5]]]!= 0).all(axis=1) | (final_df[[final_df.columns[6]]]!= 0).all(axis=1) | (final_df[[final_df.columns[7]]]!= 0).all(axis=1) | (final_df[[final_df.columns[8]]]!= 0).all(axis=1) | (final_df[[final_df.columns[9]]]!= 0).all(axis=1)]).T
