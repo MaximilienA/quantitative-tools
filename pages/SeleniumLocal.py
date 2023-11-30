@@ -65,6 +65,7 @@ def get_url():
     #Get the URL of the targetted QuickStrike table
     URL = folder.get_property('action')
     driver.quit()
+    print(URL)
 
     return URL
 
