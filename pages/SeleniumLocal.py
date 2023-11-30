@@ -25,7 +25,7 @@ from webdriver_manager.firefox import GeckoDriverManager
     #Parameters : no parameters
     #Return : the URL of the targetted webpage
 def get_url():
-    options = FirefoxOptions()
+    options = Options()
     # options.add_argument('--headless=new')
     # options.add_argument("--window-size=1920,1080")
     # options.add_argument("--disable-extensions")
