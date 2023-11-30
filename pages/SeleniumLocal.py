@@ -116,6 +116,8 @@ def get_url():
 #Récuperer l'URL et l'afficher
 URL = get_url()
 
+st.(URL)
+
 # raw_data_from_website_df  = get_meeting_dates()
 
 # scrapped_data_from_website_df = raw_data_from_website_df
