@@ -8,3 +8,4 @@ streamlit
 plotly
 matplotlib
 selenium
+webdriver_manager
