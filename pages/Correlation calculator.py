@@ -244,9 +244,9 @@ selected_name = st.selectbox("Select first index", index_name_list, index = 2)
 selected_nameB = st.selectbox("Select second index", index_name_list, index = 9)
 print("selected_name", selected_name, " ", selected_nameB)
 #CALL THE FUNCTION TO RETRIEVE DATE AND COMPUTE CORRELATIONS
-number_of_days = get_first_day_of_stock_price(df_index_name[df_index_name.Index_name == selected_name].Index_symbol.values[0], df_index_name[df_index_name.Index_name == selected_nameB].Index_symbol.values[0])
-
-table = correlation_computer(1000, selected_name, selected_nameB)
+# number_of_days = get_first_day_of_stock_price(df_index_name[df_index_name.Index_name == selected_name].Index_symbol.values[0], df_index_name[df_index_name.Index_name == selected_nameB].Index_symbol.values[0])
+number_of_days = 1000
+table = correlation_computer(number_of_days, selected_name, selected_nameB)
 
 #WITH PLOTLY WITH SLIDER
 fig = go.Figure()
