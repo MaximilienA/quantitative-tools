@@ -4,7 +4,7 @@ datetime
 timedelta
 yfinance
 numpy
-streamlit
+streamlit=1.29.0
 plotly
 matplotlib
 selenium
