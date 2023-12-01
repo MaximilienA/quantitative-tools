@@ -299,7 +299,7 @@ dataframe_from_database.columns = midpoints
 
 # dataframe_from_database
 
-selected_columns = [dataframe_from_database.columns[0], dataframe_from_database.columns[1], dataframe_from_database.columns[2], dataframe_from_database.columns[3], dataframe_from_database.columns[4], dataframe_from_database.columns[5], dataframe_from_database.columns[6], dataframe_from_database.columns[7], dataframe_from_database.columns[8], dataframe_from_database.columns[9]]
+selected_columns = [dataframe_from_database.columns[0], dataframe_from_database.columns[1], dataframe_from_database.columns[2], dataframe_from_database.columns[3], dataframe_from_database.columns[4], dataframe_from_database.columns[5], dataframe_from_database.columns[6], dataframe_from_database.columns[7], dataframe_from_database.columns[8]]
 
 max_values_indices = dataframe_from_database[selected_columns].idxmax(axis=1)
 
