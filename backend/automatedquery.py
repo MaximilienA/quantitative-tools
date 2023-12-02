@@ -3,7 +3,7 @@ import time
 import backend.database
 
 def lauchautomatedquery():
-    i=0
+    int i =0
     while (i<=10):
             now = datetime.datetime.now()
             # now = now.replace(hour=now.houdr + 1)
@@ -12,4 +12,4 @@ def lauchautomatedquery():
             backend.database.insertdata(str(formatted_time))
             
             time.sleep(5)
-            i++
+            i = i+1
