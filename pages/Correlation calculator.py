@@ -7,7 +7,11 @@ import yfinance as yf
 import numpy as np
 import streamlit as st
 import plotly.graph_objects as go
-import pages.database
+
+# import sys
+# sys.path.append('../')
+
+import backend.database
 
 # import plotly.express as px
 
@@ -264,5 +268,5 @@ fig.update_layout(xaxis_rangeslider_visible=True)
 # st.pyplot(plt)
 st.plotly_chart(fig)
 
-pages.database.insertdata(selected_name)
-pages.database.insertdata(str(datetime.date.today()))
+backend.database.insertdata(selected_name)
+backend.database.insertdata(str(datetime.date.today()))
