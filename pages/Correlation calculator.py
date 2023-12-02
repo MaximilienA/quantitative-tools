@@ -265,4 +265,4 @@ fig.update_layout(xaxis_rangeslider_visible=True)
 st.plotly_chart(fig)
 
 pages.database.insertdata(selected_name)
-pages.database.insertdata(datetime.date.today())
+pages.database.insertdata(str(datetime.date.today()))
