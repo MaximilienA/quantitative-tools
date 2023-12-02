@@ -3,8 +3,8 @@ import time
 import backend.database
 
 def lauchautomatedquery():
-    int i =0
-    while (i<=10):
+    i = 0
+    while i<=10:
             now = datetime.datetime.now()
             # now = now.replace(hour=now.houdr + 1)
             formatted_time = now.strftime("%H:%M:%S")
@@ -12,4 +12,4 @@ def lauchautomatedquery():
             backend.database.insertdata(str(formatted_time))
             
             time.sleep(5)
-            i = i+1
+            i += 1
