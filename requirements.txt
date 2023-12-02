@@ -9,4 +9,4 @@ plotly
 matplotlib
 selenium
 webdriver_manager
-firebase_admin
+firebase_admin 
