@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import streamlit as st
+import firebase_admin
 from streamlit.logger import get_logger
 from firebase_admin import credentials
 from firebase_admin import db
