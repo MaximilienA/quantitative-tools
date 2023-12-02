@@ -15,7 +15,7 @@
 import streamlit as st
 
 from streamlit.logger import get_logger
-from pages.database.py import insertdata
+from /workspaces/https---github-com-maximiliena-correlation-calculator/pages/database.py import insertdata
 
 LOGGER = get_logger(__name__)
 
