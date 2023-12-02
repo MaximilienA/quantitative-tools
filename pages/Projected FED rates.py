@@ -199,7 +199,7 @@ final_df = final_df.iloc[1:]
 # final_df 
 final_scrapped_df = final_df
 # final_scrapped_df #dataframe à mettre en BDD
-
+st.write(final_scrapped_df)
 dataframe_from_database = final_scrapped_df
 def convert_percentage(x):
     if isinstance(x, str):
