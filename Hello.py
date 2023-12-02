@@ -38,7 +38,9 @@ def run():
         **👈 Select a demo from the sidebar** to see some examples
         of what Streamlit can do!
     """
+    
     )
+    database.insertdata("Connected 3")
 
 
 if __name__ == "__main__":
