@@ -18,7 +18,6 @@ from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.options import Options
 
-st.write("Test")
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
     #Parameters : no parameters
     #Return : the URL of the targetted webpage
