@@ -7,7 +7,7 @@ import yfinance as yf
 import numpy as np
 import streamlit as st
 import plotly.graph_objects as go
-import database
+import database.py
 # import plotly.express as px
 
 # number_of_days = 150
