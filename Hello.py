@@ -15,7 +15,7 @@
 import streamlit as st
 
 from streamlit.logger import get_logger
-from workspaces.https---github-com-maximiliena-correlation-calculator.pages.database.py import insertdata
+from database
 
 LOGGER = get_logger(__name__)
 
@@ -39,7 +39,7 @@ def run():
     """
     
     )
-    insertdata("Connected 3")
+    database.insertdata("Connected 3")
 
 
 if __name__ == "__main__":
