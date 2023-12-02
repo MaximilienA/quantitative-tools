@@ -19,6 +19,7 @@ import datetime
 import time
 
 import backend.database
+import backend.automatedquery
 
 LOGGER = get_logger(__name__)
 
@@ -43,7 +44,9 @@ def run():
     
     )
 
-       
+    
+    automatedquery.lauchautomatedquery()
+        
 
 
 if __name__ == "__main__":
