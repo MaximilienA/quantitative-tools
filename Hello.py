@@ -22,7 +22,7 @@ from firebase_admin import auth
 cred = credentials.Certificate('quantitativetoolsdatabase-90b51ea9a1ca.json')
 firebase_admin.initialize(cred, {"databaseURL" : "https://quantitativetoolsdatabase-default-rtdb.europe-west1.firebasedatabase.app/"})
 
-ref = dn.reference("/")
+ref = db.reference("/")
 
 LOGGER = get_logger(__name__)
 
