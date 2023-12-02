@@ -34,7 +34,7 @@ def run():
     )
 
     st.write("# Welcome to Quantitative tools!")
-    st.write(ref.get())
+    st.write(ref.get()) 
 
     st.markdown(
         """
