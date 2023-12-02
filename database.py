@@ -12,7 +12,7 @@ ref = db.reference("/Test")
 # st.write(ref.get()) 
 
 def insertdata(data):
-    # db.reference("/Test").push().set(data)
-    st.write("TEEEST")
+    db.reference("/Test").push().set(data)
+    # st.write("TEEEST")
 
 st.write(ref.get()) 
