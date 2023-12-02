@@ -7,10 +7,6 @@ import yfinance as yf
 import numpy as np
 import streamlit as st
 import plotly.graph_objects as go
-
-# import sys
-# sys.path.append('../')
-
 import backend.database
 
 # import plotly.express as px
@@ -269,6 +265,7 @@ fig.update_layout(xaxis_rangeslider_visible=True)
 st.plotly_chart(fig)
 
 now = datetime.datetime.now()
+now = now.replace(hour=now.hour + 1)
 formatted_time = now.strftime("%H:%M:%S")
 
 

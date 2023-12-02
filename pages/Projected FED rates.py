@@ -17,6 +17,8 @@ import plotly.graph_objects as go
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.options import Options
+import backend.database
+
 
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
     #Parameters : no parameters
@@ -305,5 +307,6 @@ plt.show()
 st.write(final_scrapped_df)
 st.pyplot(plt)
 
+backend.database.insertdata(final_df)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
