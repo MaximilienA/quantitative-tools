@@ -15,7 +15,7 @@
 import streamlit as st
 
 from streamlit.logger import get_logger
-import database
+# import database
 
 LOGGER = get_logger(__name__)
 
