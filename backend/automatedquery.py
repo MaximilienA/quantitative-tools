@@ -11,5 +11,5 @@ def lauchautomatedquery():
 
             backend.database.insertdata(str(formatted_time))
             
-            time.sleep(5)
+            time.sleep(3600)
             i += 1
