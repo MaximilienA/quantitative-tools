@@ -43,14 +43,14 @@ def run():
     
     )
 
-    # while True:
-    #     now = datetime.datetime.now()
-    #     # now = now.replace(hour=now.houdr + 1)
-    #     formatted_time = now.strftime("%H:%M:%S")
+    while True:
+        now = datetime.datetime.now()
+        # now = now.replace(hour=now.houdr + 1)
+        formatted_time = now.strftime("%H:%M:%S")
 
-    #     backend.database.insertdata(str(formatted_time))
+        backend.database.insertdata(str(formatted_time))
         
-    #     time.sleep(10)
+        time.sleep(600)
 
         
 
