@@ -268,7 +268,7 @@ now = datetime.datetime.now()
 now = now.replace(hour=now.hour + 1)
 formatted_time = now.strftime("%H:%M:%S")
 
-selected_name = "Index 1 : " + selected_name
-backend.database.insertdata(selected_name)
-backend.database.insertdata(str(datetime.date.today()))
-backend.database.insertdata(str(formatted_time))
+# selected_name = "Index 1 : " + selected_name
+# backend.database.insertdata(selected_name)
+# backend.database.insertdata(str(datetime.date.today()))
+# backend.database.insertdata(str(formatted_time))
