@@ -39,7 +39,7 @@ def run():
     """
     
     )
-    insertdata("Connected 3")
+    database.insertdata("Connected 3")
 
 
 if __name__ == "__main__":
