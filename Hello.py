@@ -16,7 +16,7 @@ import streamlit as st
 
 from streamlit.logger import get_logger
 import datetime
-import time
+from time import sleep
 
 import backend.database
 
