@@ -26,35 +26,17 @@ from webdriver_manager.firefox import GeckoDriverManager
     #Return : the URL of the targetted webpage
 def get_url():
     options = Options()
-    # options.add_argument('--headless=new')
-    # options.add_argument("--window-size=1920,1080")
-    # options.add_argument("--disable-extensions")
-    # options.add_argument("--proxy-server='direct://'")
-    # options.add_argument("--proxy-bypass-list=*")
-    # options.add_argument("--start-maximized")
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--disable-dev-shm-usage')
-    # options.add_argument('--no-sandbox')
-    # options.add_argument('--ignore-certificate-errors')
-
     options.add_argument('--headless')
 
-    # service = Service(GeckoDriverManager().install())
     driver = webdriver.Firefox(
         options=options, 
-        # service=service
     )
 
-    # driver = webdriver.Firefox(options=options)
-
     driver.implicitly_wait(2)
-    #driver.maximize_window()
 
     #OPEN FIRST URL AND GET SECOND URL
     driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
                "/countdown-to-fomc.html")
-
-    #driver.implicitly_wait(1) # gives an implicit wait for 20 seconds
 
     #Switch to area cmeIframe-jtxelq2f
     driver.switch_to.frame(driver.find_element(By.ID, "cmeIframe-jtxelq2f"))
@@ -65,37 +47,37 @@ def get_url():
     #Get the URL of the targetted QuickStrike table
     URL = folder.get_property('action')
     driver.quit()
-    print(URL)
 
     return URL
 
 # ===== FUNCTION THAT SCRAPS THE DATA FROM THE WEBPAGE OF THE TARGETTED URL =====
     #Parameters : no parameters
     #Return : a dataframe of the targetted table of the targetted URL
+    #OUTPUT example: 
+    # 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
+    # 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
+    # 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
+    # 3	20/03/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 21,0%...
+    # 4	01/05/2024 0,0% 0,0% 0,0% 0,0% 0,0% 8,1% 39,7%...
+    # 5	12/06/2024 0,0% 0,0% 0,0% 0,0% 4,0% 23,8% 43,0...
+    # 6	31/07/2024 0,0% 0,0% 0,0% 2,2% 14,7% 34,1% 33,...
+    # 7	18/09/2024 0,0% 0,0% 1,3% 9,7% 26,3% 34,0% 21,...
+    # 8	07/11/2024 0,0% 0,7% 5,7% 18,4% 30,4% 27,6% 13...
 def get_meeting_dates():
     options = Options()
     options.add_argument('--headless')
 
-    # service = Service(GeckoDriverManager().install())
     driver = webdriver.Firefox(
         options=options, 
-        # service=service
     )
 
-    # driver = webdriver.Firefox(options=options)
-
-    driver.implicitly_wait(2)
+    # driver.implicitly_wait(2)
     
-
     URL = get_url()
     # print(URL)
 
     #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
-    # driver_Click = webdriver.Chrome(options=options)
     driver_Click = webdriver.Firefox(options=options)
-
-
-    #driver_Click.maximize_window()
 
     #Open a new window with the taragetted QuickStrike URL we juste get from the previous get_url function 
     driver_Click.get(URL)
@@ -118,33 +100,15 @@ def get_meeting_dates():
 
         current_df=pd.DataFrame({ligne_selectionnee})
         
-        # df.append(current_df, ignore_index=True)
-
         df = pd.concat([df, current_df], ignore_index=True)
     driver_Click.quit()
     return df
 
-#Récuperer l'URL et l'afficher
-# URL = get_url()
+raw_data_from_website_df  = get_meeting_dates()
 
-
-# raw_data_from_website_df  = get_meeting_dates()
-
-# scrapped_data_from_website_df = raw_data_from_website_df
+scrapped_data_from_website_df = raw_data_from_website_df
 
 # print(scrapped_data_from_website_df.iloc[0,0], "\n") #OUTPUT : MEETING DATE 350-375 375-400 400-425 425-450 450-475 475-500 500-525 525-550 550-575 575-600
-
-
-# scrapped_data_from_website_df #OUTPUT : 
-# 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
-# 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
-# 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
-# 3	20/03/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 21,0%...
-# 4	01/05/2024 0,0% 0,0% 0,0% 0,0% 0,0% 8,1% 39,7%...
-# 5	12/06/2024 0,0% 0,0% 0,0% 0,0% 4,0% 23,8% 43,0...
-# 6	31/07/2024 0,0% 0,0% 0,0% 2,2% 14,7% 34,1% 33,...
-# 7	18/09/2024 0,0% 0,0% 1,3% 9,7% 26,3% 34,0% 21,...
-# 8	07/11/2024 0,0% 0,7% 5,7% 18,4% 30,4% 27,6% 13...
 
 #FUNCTION TO TRANSFORM ONE LINE OF THE probabilities_scrapped_raw string in a transposed dataframe
     #Parameters : 
@@ -343,4 +307,4 @@ plt.show()
 
 st.pyplot(plt)
 
-#streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\Selenium.py"
+#streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
