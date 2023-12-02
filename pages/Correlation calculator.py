@@ -268,5 +268,10 @@ fig.update_layout(xaxis_rangeslider_visible=True)
 # st.pyplot(plt)
 st.plotly_chart(fig)
 
+now = datetime.datetime.now()
+formatted_time = now.strftime("%H:%M:%S")
+
+
 backend.database.insertdata(selected_name)
 backend.database.insertdata(str(datetime.date.today()))
+backend.database.insertdata(str(formatted_time))
