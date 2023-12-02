@@ -45,7 +45,7 @@ def run():
     )
 
     
-    automatedquery.lauchautomatedquery()
+    backend.automatedquery.lauchautomatedquery()
         
 
 
