@@ -304,6 +304,5 @@ plt.show()
 st.write(final_scrapped_df)
 st.pyplot(plt)
 
-Database.insertdata("Connected 3")
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"

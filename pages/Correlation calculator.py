@@ -261,3 +261,5 @@ fig.update_layout(xaxis_rangeslider_visible=True)
 # DISPLAY GRAPH IN WINDOWS POP UP WINDOW
 # st.pyplot(plt)
 st.plotly_chart(fig)
+
+Database.insertdata("Connected 3")
