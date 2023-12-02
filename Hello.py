@@ -19,15 +19,16 @@ from firebase_admin import credentials
 from firebase_admin import db
 from firebase_admin import auth
 
-cred = credentials.Certificate('quantitativetoolsdatabase-90b51ea9a1ca.json')
-firebase_admin.initialize_app(cred, {"databaseURL" : "https://quantitativetoolsdatabase-default-rtdb.europe-west1.firebasedatabase.app/"})
 
-ref = db.reference("/")
 
 LOGGER = get_logger(__name__)
 
 
 def run():
+    cred = credentials.Certificate('quantitativetoolsdatabase-90b51ea9a1ca.json')
+    firebase_admin.initialize_app(cred, {"databaseURL" : "https://quantitativetoolsdatabase-default-rtdb.europe-west1.firebasedatabase.app/"})
+
+    ref = db.reference("/")
     st.set_page_config(
         page_title="Quantitative tools",
         page_icon="👋",
