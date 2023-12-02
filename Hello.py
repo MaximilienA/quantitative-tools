@@ -15,7 +15,8 @@
 import streamlit as st
 
 from streamlit.logger import get_logger
-# import database
+import datetime
+import backend.database
 
 LOGGER = get_logger(__name__)
 
@@ -39,7 +40,17 @@ def run():
     """
     
     )
-    # database.insertdata("Connected 3")
+
+    while True:
+        now = datetime.datetime.now()
+        # now = now.replace(hour=now.houdr + 1)
+        formatted_time = now.strftime("%H:%M:%S")
+
+        backend.database.insertdata(str(formatted_time))
+        
+        sleep(60)
+
+        
 
 
 if __name__ == "__main__":
