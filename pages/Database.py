@@ -8,5 +8,5 @@ cred = credentials.Certificate('quantitativetoolsdatabase-90b51ea9a1ca.json')
 if not firebase_admin._apps:
     default_app = firebase_admin.initialize_app(cred, {"databaseURL" : "https://quantitativetoolsdatabase-default-rtdb.europe-west1.firebasedatabase.app/"})
 
-ref = db.reference("/")
+ref = db.reference("/Test")
 st.write(ref.get()) 
