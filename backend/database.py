@@ -15,4 +15,4 @@ def insertdata(data):
     db.reference("/Test").push().set(data)
     
 
-st.write(ref.get()) 
+# st.write(ref.get()) 
