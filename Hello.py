@@ -15,7 +15,7 @@
 import streamlit as st
 
 from streamlit.logger import get_logger
-import database
+from pages.database.py import insertdata
 
 LOGGER = get_logger(__name__)
 
@@ -39,7 +39,7 @@ def run():
     """
     
     )
-    database.insertdata("Connected 3")
+    insertdata("Connected 3")
 
 
 if __name__ == "__main__":
