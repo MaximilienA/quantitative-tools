@@ -199,7 +199,7 @@ final_df = final_df.iloc[1:]
 # final_df 
 final_scrapped_df = final_df
 # final_scrapped_df #dataframe à mettre en BDD
-st.write(final_scrapped_df)
+
 dataframe_from_database = final_scrapped_df
 def convert_percentage(x):
     if isinstance(x, str):
@@ -301,7 +301,7 @@ increment_values = make_increment(max_value+0.25, min_value-0.25, int((max_value
 plt.gca().set_yticks(increment_values)
 
 plt.show()
-
+st.write(final_scrapped_df)
 st.pyplot(plt)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
