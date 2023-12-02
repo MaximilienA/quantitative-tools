@@ -16,7 +16,7 @@ import streamlit as st
 
 from streamlit.logger import get_logger
 import datetime
-from time import sleep
+import time
 
 import backend.database
 
@@ -50,7 +50,7 @@ def run():
 
         backend.database.insertdata(str(formatted_time))
         
-        sleep(60)
+        time.sleep(10)
 
         
 
