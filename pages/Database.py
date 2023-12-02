@@ -10,3 +10,8 @@ if not firebase_admin._apps:
 
 ref = db.reference("/Test")
 st.write(ref.get()) 
+
+db.reference("/Test").push().set("Connected 2")
+
+
+st.write(ref.get()) 
