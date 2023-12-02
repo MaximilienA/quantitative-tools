@@ -9,9 +9,9 @@ if not firebase_admin._apps:
     default_app = firebase_admin.initialize_app(cred, {"databaseURL" : "https://quantitativetoolsdatabase-default-rtdb.europe-west1.firebasedatabase.app/"})
 
 ref = db.reference("/Test")
-st.write(ref.get()) 
+# st.write(ref.get()) 
 
-# db.reference("/Test").push().set("Connected 2")
-
+def insertdata(data):
+    db.reference("/Test").push().set(data)
 
 st.write(ref.get()) 
