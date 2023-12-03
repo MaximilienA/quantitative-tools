@@ -310,7 +310,7 @@ now = datetime.datetime.now()
 now = now.replace(hour=now.hour + 1)
 formatted_time = now.strftime("%H:%M:%S")
 
-json_data = final_scrapped_df.to_json(orient='split')
+json_data = final_scrapped_df.to_json(orient='index')
 
 # # Convert JSON object to a list
 # data_list = list(json_data.items())
