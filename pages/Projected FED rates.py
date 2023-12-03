@@ -304,8 +304,10 @@ increment_values = make_increment(max_value+0.25, min_value-0.25, int((max_value
 plt.gca().set_yticks(increment_values)
 
 plt.show()
+json_data = final_scrapped_df.to_json(orient='records')
+print(json_data)
 st.write(final_scrapped_df)
-print(json_data = final_scrapped_df.to_json(orient='records'))
+st.write(json_data)
 st.pyplot(plt)
 
 # backend.database.insertdata(final_scrapped_df)
