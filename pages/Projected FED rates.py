@@ -2,6 +2,7 @@
 
 import pandas as pd
 import datetime
+import time
 from datetime import date 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -304,13 +305,31 @@ increment_values = make_increment(max_value+0.25, min_value-0.25, int((max_value
 plt.gca().set_yticks(increment_values)
 
 plt.show()
+
+now = datetime.datetime.now()
+now = now.replace(hour=now.hour + 1)
+formatted_time = now.strftime("%H:%M:%S")
+
 json_data = final_scrapped_df.to_json(orient='records')
-print(json_data)
+
+# Convert JSON object to a list
+data_list = list(json_data.items())
+
+# Create a new key-value pair to insert
+new_data = ('Date', formatted_time)
+
+# Insert the new data at the first position
+data_list.insert(0, new_data)
+
+# Convert the list back to a JSON object
+data = dict(data_list)
+
+print(data)
 
 st.write(final_scrapped_df)
 st.write(json_data)
 st.pyplot(plt)
 
-backend.database.insertdata(json_data)
+backend.database.insertdata(data)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
