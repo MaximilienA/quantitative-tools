@@ -307,6 +307,6 @@ plt.show()
 st.write(final_scrapped_df)
 st.pyplot(plt)
 
-backend.database.insertdata(final_scrapped_df)
+# backend.database.insertdata(final_scrapped_df)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
