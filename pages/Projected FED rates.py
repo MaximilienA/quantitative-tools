@@ -330,6 +330,6 @@ st.write(final_scrapped_df)
 st.write(type(json_data))
 st.pyplot(plt)
 
-backend.database.insertdata(json_data)
+backend.database.insertdata(json_data,formatted_time)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
