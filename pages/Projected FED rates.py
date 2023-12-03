@@ -310,7 +310,7 @@ now = datetime.datetime.now()
 now = now.replace(hour=now.hour + 1)
 formatted_time = now.strftime("%H:%M:%S")
 
-json_data = final_scrapped_df.to_json(orient='table')
+json_data = final_scrapped_df.to_json(orient='table', , compression='dict')
 json_data = str(formatted_time) + " " + json_data
 # # Convert JSON object to a list
 # data_list = list(json_data.items())
@@ -326,8 +326,9 @@ json_data = str(formatted_time) + " " + json_data
 
 # print(data)
 
-st.write(final_scrapped_df)
+# st.write(final_scrapped_df)
 st.write(json_data)
+st.write(type(json_data))
 st.pyplot(plt)
 
 backend.database.insertdata(json_data)
