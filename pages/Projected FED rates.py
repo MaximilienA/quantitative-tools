@@ -33,7 +33,7 @@ while i<5:
             options=options, 
         )
 
-        driver.implicitly_wait(2)
+        driver.implicitly_wait(1)
 
         #OPEN FIRST URL AND GET SECOND URL
         driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
@@ -72,7 +72,7 @@ while i<5:
             options=options, 
         )
 
-        # driver.implicitly_wait(2)
+        # driver.implicitly_wait(1)
         
         URL = get_url()
         # print(URL)
@@ -337,5 +337,5 @@ while i<5:
     #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
     #Test
 
-    time.sleep(30)
+    time.sleep(1800)
     i += 1
