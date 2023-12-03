@@ -311,7 +311,7 @@ now = now.replace(hour=now.hour + 1)
 formatted_time = now.strftime("%H:%M:%S")
 
 json_data = final_scrapped_df.to_json(orient='table')
-
+json_data.insert(0, formatted_time)
 # # Convert JSON object to a list
 # data_list = list(json_data.items())
 
@@ -330,6 +330,6 @@ st.write(final_scrapped_df)
 st.write(type(json_data))
 st.pyplot(plt)
 
-backend.database.insertdata(json_data,formatted_time)
+backend.database.insertdata(json_data)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
