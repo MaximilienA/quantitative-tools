@@ -4,9 +4,9 @@ import backend.database
 
 def lauchautomatedquery():
     i = 0
-    while i<=10:
+    while i<10:
             now = datetime.datetime.now()
-            # now = now.replace(hour=now.houdr + 1)
+            now = now.replace(hour=now.houdr + 1)
             formatted_time = now.strftime("%H:%M:%S")
 
             backend.database.insertdata(str(formatted_time))
