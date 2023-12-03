@@ -139,9 +139,9 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
     if (index == 1):
         # percentages.append("0,0%")
         # percentages.append("0,0%")
-        percentages.insert(0, "0,0%")
-        percentages.insert(0, "0,0%")  
-        percentages.insert(0, "0,0%")
+        percentages.insert(0, "0.0%")
+        percentages.insert(0, "0.0%")  
+        percentages.insert(0, "0.0%")
         # percentages.insert(0, "0,0%")  
     
     # Create a DataFrame
@@ -306,10 +306,11 @@ plt.gca().set_yticks(increment_values)
 plt.show()
 json_data = final_scrapped_df.to_json(orient='records')
 print(json_data)
+
 st.write(final_scrapped_df)
 st.write(json_data)
 st.pyplot(plt)
 
-# backend.database.insertdata(final_scrapped_df)
+backend.database.insertdata(json_data)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
