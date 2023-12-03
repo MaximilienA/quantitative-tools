@@ -327,7 +327,7 @@ json_data = final_scrapped_df.to_json(orient='table')
 # print(data)
 
 st.write(final_scrapped_df)
-st.write(json_data)
+st.write(type(json_data))
 st.pyplot(plt)
 
 backend.database.insertdata(json_data)
