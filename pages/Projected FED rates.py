@@ -334,3 +334,4 @@ st.pyplot(plt)
 backend.database.insertdata(json_data)
 
 #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
+#Test
