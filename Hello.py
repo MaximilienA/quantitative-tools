@@ -44,8 +44,10 @@ def run():
     
     )
 
-    
-    # backend.automatedquery.lauchautomatedquery()
+    start_automatedquery = st.toggle("Start/stop automated Firebase query")
+
+    if (start_automatedquery):
+        backend.automatedquery.lauchautomatedquery()
         
 
 
