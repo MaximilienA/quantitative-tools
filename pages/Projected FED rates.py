@@ -337,5 +337,5 @@ while i<5:
     #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
     #Test
 
-    time.sleep(60)
+    time.sleep(300)
     i += 1
