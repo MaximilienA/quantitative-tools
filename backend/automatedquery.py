@@ -7,7 +7,7 @@ def lauchautomatedquery():
     i = 0
     while i<5:
         now = datetime.datetime.now()
-        now = now.replace(hour=now.hour + 1)
+        # now = now.replace(hour=now.hour + 1)
         formatted_time = now.strftime("%H:%M:%S")
 
         #backend.database.insertdata(str(formatted_time))
