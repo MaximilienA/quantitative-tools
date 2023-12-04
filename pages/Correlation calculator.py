@@ -265,7 +265,7 @@ fig.update_layout(xaxis_rangeslider_visible=True)
 st.plotly_chart(fig)
 
 now = datetime.datetime.now()
-now = now.replace(hour=now.hour + 1)
+# now = now.replace(hour=now.hour + 1)
 formatted_time = now.strftime("%H:%M:%S")
 
 # selected_name = "Index 1 : " + selected_name

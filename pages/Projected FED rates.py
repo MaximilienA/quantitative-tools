@@ -51,59 +51,59 @@ def get_url():
 
     return URL
 
-# # ===== FUNCTION THAT SCRAPS THE DATA FROM THE WEBPAGE OF THE TARGETTED URL =====
-#     #Parameters : no parameters
-#     #Return : a dataframe of the targetted table of the targetted URL
-#     #OUTPUT example: 
-#     # 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
-#     # 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
-#     # 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
-#     # 3	20/03/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 21,0%...
-#     # 4	01/05/2024 0,0% 0,0% 0,0% 0,0% 0,0% 8,1% 39,7%...
-#     # 5	12/06/2024 0,0% 0,0% 0,0% 0,0% 4,0% 23,8% 43,0...
-#     # 6	31/07/2024 0,0% 0,0% 0,0% 2,2% 14,7% 34,1% 33,...
-#     # 7	18/09/2024 0,0% 0,0% 1,3% 9,7% 26,3% 34,0% 21,...
-#     # 8	07/11/2024 0,0% 0,7% 5,7% 18,4% 30,4% 27,6% 13...
-# def get_meeting_dates():
-#     options = Options()
-#     options.add_argument('--headless')
+# ===== FUNCTION THAT SCRAPS THE DATA FROM THE WEBPAGE OF THE TARGETTED URL =====
+    #Parameters : no parameters
+    #Return : a dataframe of the targetted table of the targetted URL
+    #OUTPUT example: 
+    # 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
+    # 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
+    # 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
+    # 3	20/03/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 21,0%...
+    # 4	01/05/2024 0,0% 0,0% 0,0% 0,0% 0,0% 8,1% 39,7%...
+    # 5	12/06/2024 0,0% 0,0% 0,0% 0,0% 4,0% 23,8% 43,0...
+    # 6	31/07/2024 0,0% 0,0% 0,0% 2,2% 14,7% 34,1% 33,...
+    # 7	18/09/2024 0,0% 0,0% 1,3% 9,7% 26,3% 34,0% 21,...
+    # 8	07/11/2024 0,0% 0,7% 5,7% 18,4% 30,4% 27,6% 13...
+def get_meeting_dates():
+    options = Options()
+    options.add_argument('--headless')
 
-#     driver = webdriver.Firefox(
-#         options=options, 
-#     )
+    driver = webdriver.Firefox(
+        options=options, 
+    )
 
-#     # driver.implicitly_wait(1)
+    # driver.implicitly_wait(1)
     
-#     URL = get_url()
-#     # print(URL)
+    URL = get_url()
+    # print(URL)
 
-#     #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
-#     driver_Click = webdriver.Firefox(options=options)
+    #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
+    driver_Click = webdriver.Firefox(options=options)
 
-#     #Open a new window with the taragetted QuickStrike URL we juste get from the previous get_url function 
-#     driver_Click.get(URL)
+    #Open a new window with the taragetted QuickStrike URL we juste get from the previous get_url function 
+    driver_Click.get(URL)
     
-#     #Click on the "Probabilities" component which ID is "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"
-#     folder_Click = driver_Click.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree")
-#     folder_Click.click()
+    #Click on the "Probabilities" component which ID is "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"
+    folder_Click = driver_Click.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree")
+    folder_Click.click()
 
-#     #Gives an implicit wait for 5 seconds so that the QuickStrike table can load
-#     driver_Click.implicitly_wait(2) 
+    #Gives an implicit wait for 5 seconds so that the QuickStrike table can load
+    driver_Click.implicitly_wait(2) 
 
-#     df = pd.DataFrame()
+    df = pd.DataFrame()
 
-#     #Get data from the QuickStrike table and stores it in the df
-#     for i in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]:
+    #Get data from the QuickStrike table and stores it in the df
+    for i in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]:
 
-#         ligne_selectionnee = "ligne" + str(i)
-#         current_xpath = "/html[1]/body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/table[2]/tbody[1]/tr[" + str(i) + "]"
-#         ligne_selectionnee = driver_Click.find_element(By.XPATH, current_xpath).text
+        ligne_selectionnee = "ligne" + str(i)
+        current_xpath = "/html[1]/body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/table[2]/tbody[1]/tr[" + str(i) + "]"
+        ligne_selectionnee = driver_Click.find_element(By.XPATH, current_xpath).text
 
-#         current_df=pd.DataFrame({ligne_selectionnee})
+        current_df=pd.DataFrame({ligne_selectionnee})
         
-#         df = pd.concat([df, current_df], ignore_index=True)
-#     driver_Click.quit()
-#     return df
+        df = pd.concat([df, current_df], ignore_index=True)
+    driver_Click.quit()
+    return df
 
 # raw_data_from_website_df  = get_meeting_dates()
 
@@ -336,11 +336,16 @@ def get_url():
 
 # #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
 
-# #Test
+
 
 # # time.sleep(300)
 # # i += 1
 
 
+# # =============== Test ===============
 
-backend.database.insertdata(get_url())
+df = get_meeting_dates()
+
+json_data = df.to_json(orient='table', compression='dict')
+
+backend.database.insertdata(json_data)
