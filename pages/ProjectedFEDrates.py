@@ -178,7 +178,7 @@ def dfRatesMerger():
         #Merge the clean dataframe with the default rate interval
         Rates_df=pd.merge(transformed_dateframe_of_specific_meeting_date,Rates_df, how='right', on='Rates')
 
-        #Format final data
+        #Format final table
         Rates_df.rename(columns={'Percentage': Date_of_specific_meeting_date}, inplace=True)
         Rates_df = Rates_df.fillna("0,0%")
         
