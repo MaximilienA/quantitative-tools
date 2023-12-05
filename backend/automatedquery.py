@@ -14,7 +14,7 @@ def lauchautomatedquery():
         json_data = pages.ProjectedFEDrates.datascrapping_FED()
         backend.database.insertdata(json_data)
 
-        time.sleep(60)
+        time.sleep(180)
         i += 1
 
 def lauchautomatedquerytestAlice():
