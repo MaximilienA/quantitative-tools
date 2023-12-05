@@ -19,9 +19,7 @@ from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.options import Options
 import backend.database
 
-i = 0
-while i<10:
-
+datascrapping_FED():
     # ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
         #Parameters : no parameters
         #Return : the URL of the targetted webpage
@@ -333,20 +331,8 @@ while i<10:
     st.write(type(json_data))
     st.pyplot(plt)
 
-    backend.database.insertdata(json_data)
+    # backend.database.insertdata(json_data)
 
     #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
-    time.sleep(3600)
-    i += 1
+    return json_data
 
-
-
-
-
-# =============== Test ===============
-
-# df = get_meeting_dates()
-
-# json_data = df.to_json(orient='table', compression='dict')
-
-# backend.database.insertdata(json_data)

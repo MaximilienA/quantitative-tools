@@ -2,12 +2,26 @@ import datetime
 import time
 import backend.database
 import pandas as pd
+import pages.ProjectedFEDrates
 
 def lauchautomatedquery():
     i = 0
     while i<5:
-        now = datetime.datetime.now()
+        # now = datetime.datetime.now()
         # now = now.replace(hour=now.hour + 1)
+        # formatted_time = now.strftime("%H:%M:%S")
+
+        json_data = datascrapping_FED()
+        backend.database.insertdata(json_data)
+
+        time.sleep(60)
+        i += 1
+
+def lauchautomatedquerytestAlice():
+    i = 0
+    while i<5:
+        now = datetime.datetime.now()
+        now = now.replace(hour=now.hour + 1)
         formatted_time = now.strftime("%H:%M:%S")
 
         #backend.database.insertdata(str(formatted_time))
