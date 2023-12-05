@@ -30,7 +30,7 @@ def get_url():
         options=options, 
     )
 
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(5)
 
     #OPEN FIRST URL AND GET SECOND URL
     driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
@@ -85,7 +85,7 @@ def get_meeting_dates():
     folder_Click.click()
 
     #Gives an implicit wait for 5 seconds so that the QuickStrike table can load
-    driver_Click.implicitly_wait(2) 
+    driver_Click.implicitly_wait(5) 
 
     df = pd.DataFrame()
 
