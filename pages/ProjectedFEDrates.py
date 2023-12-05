@@ -19,177 +19,182 @@ from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.options import Options
 import backend.database
 
-datascrapping_FED():
-    # ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
+# ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
         #Parameters : no parameters
         #Return : the URL of the targetted webpage
-    def get_url():
-        options = Options()
-        options.add_argument('--headless')
+def get_url():
+    options = Options()
+    options.add_argument('--headless')
 
-        driver = webdriver.Firefox(
-            options=options, 
-        )
+    driver = webdriver.Firefox(
+        options=options, 
+    )
 
-        driver.implicitly_wait(2)
+    driver.implicitly_wait(2)
 
-        #OPEN FIRST URL AND GET SECOND URL
-        driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
-                "/countdown-to-fomc.html")
+    #OPEN FIRST URL AND GET SECOND URL
+    driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
+            "/countdown-to-fomc.html")
 
-        #Switch to area cmeIframe-jtxelq2f
-        driver.switch_to.frame(driver.find_element(By.ID, "cmeIframe-jtxelq2f"))
+    #Switch to area cmeIframe-jtxelq2f
+    driver.switch_to.frame(driver.find_element(By.ID, "cmeIframe-jtxelq2f"))
 
-        #Find the element Form1 -> correspond to the Quickstrike window integrated to the website
-        folder = driver.find_element(By.ID, "Form1")
+    #Find the element Form1 -> correspond to the Quickstrike window integrated to the website
+    folder = driver.find_element(By.ID, "Form1")
 
-        #Get the URL of the targetted QuickStrike table
-        URL = folder.get_property('action')
-        driver.quit()
+    #Get the URL of the targetted QuickStrike table
+    URL = folder.get_property('action')
+    driver.quit()
 
-        return URL
+    return URL
 
-    # ===== FUNCTION THAT SCRAPS THE DATA FROM THE WEBPAGE OF THE TARGETTED URL =====
-        #Parameters : no parameters
-        #Return : a dataframe of the targetted table of the targetted URL
-        #OUTPUT example: 
-        # 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
-        # 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
-        # 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
-        # 3	20/03/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 21,0%...
-        # 4	01/05/2024 0,0% 0,0% 0,0% 0,0% 0,0% 8,1% 39,7%...
-        # 5	12/06/2024 0,0% 0,0% 0,0% 0,0% 4,0% 23,8% 43,0...
-        # 6	31/07/2024 0,0% 0,0% 0,0% 2,2% 14,7% 34,1% 33,...
-        # 7	18/09/2024 0,0% 0,0% 1,3% 9,7% 26,3% 34,0% 21,...
-        # 8	07/11/2024 0,0% 0,7% 5,7% 18,4% 30,4% 27,6% 13...
-    def get_meeting_dates():
-        options = Options()
-        options.add_argument('--headless')
+# ===== FUNCTION THAT SCRAPS THE DATA FROM THE WEBPAGE OF THE TARGETTED URL =====
+    #Parameters : no parameters
+    #Return : a dataframe of the targetted table of the targetted URL
+    #OUTPUT example: 
+    # 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
+    # 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
+    # 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
+    # 3	20/03/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 21,0%...
+    # 4	01/05/2024 0,0% 0,0% 0,0% 0,0% 0,0% 8,1% 39,7%...
+    # 5	12/06/2024 0,0% 0,0% 0,0% 0,0% 4,0% 23,8% 43,0...
+    # 6	31/07/2024 0,0% 0,0% 0,0% 2,2% 14,7% 34,1% 33,...
+    # 7	18/09/2024 0,0% 0,0% 1,3% 9,7% 26,3% 34,0% 21,...
+    # 8	07/11/2024 0,0% 0,7% 5,7% 18,4% 30,4% 27,6% 13...
+def get_meeting_dates():
+    options = Options()
+    options.add_argument('--headless')
 
-        driver = webdriver.Firefox(
-            options=options, 
-        )
+    driver = webdriver.Firefox(
+        options=options, 
+    )
 
-        # driver.implicitly_wait(1)
+    # driver.implicitly_wait(1)
+    
+    URL = get_url()
+    # print(URL)
+
+    #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
+    driver_Click = webdriver.Firefox(options=options)
+
+    #Open a new window with the taragetted QuickStrike URL we juste get from the previous get_url function 
+    driver_Click.get(URL)
+    
+    #Click on the "Probabilities" component which ID is "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"
+    folder_Click = driver_Click.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree")
+    folder_Click.click()
+
+    #Gives an implicit wait for 5 seconds so that the QuickStrike table can load
+    driver_Click.implicitly_wait(2) 
+
+    df = pd.DataFrame()
+
+    #Get data from the QuickStrike table and stores it in the df
+    for i in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]:
+
+        ligne_selectionnee = "ligne" + str(i)
+        current_xpath = "/html[1]/body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/table[2]/tbody[1]/tr[" + str(i) + "]"
+        ligne_selectionnee = driver_Click.find_element(By.XPATH, current_xpath).text
+
+        current_df=pd.DataFrame({ligne_selectionnee})
         
-        URL = get_url()
-        # print(URL)
+        df = pd.concat([df, current_df], ignore_index=True)
+    driver_Click.quit()
+    return df
 
-        #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
-        driver_Click = webdriver.Firefox(options=options)
+#FUNCTION TO TRANSFORM ONE LINE OF THE probabilities_scrapped_raw string in a transposed dataframe
+    #Parameters : 
+        # - dataheader : the header_scrapped_raw string
+        # - data_probabilities : the probabilities_scrapped_raw string
+        # - index : a binary index to know if the data is the first one and to add two 0 to counter the default of the initial targetted QuickStrike table
+    #Return : the slice dataframe corresponding to a specific date
+    #Return example : 
+    # Rates Percentage
+    # 0  350-375       0,0%
+    # 1  375-400       0,0%
+    # 2  400-425       0,0%
+    # 3  425-450       0,0%
+    # 4  450-475       0,0%
+    # 5  475-500      95,5%
+    # 6  500-525       4,5%
+    # 7  525-550       0,0%
+    # 8  550-575          0
+    # 9  575-600          0
+def dataSlicer(data_headers_raw, data_probabilities_raw, index):
+    #Split the data into date and percentages
+    data_headers_clean = data_headers_raw[0].split(" ")
+    date_percentages_clean = data_probabilities_raw[0].split(" ")
 
-        #Open a new window with the taragetted QuickStrike URL we juste get from the previous get_url function 
-        driver_Click.get(URL)
+    #Extract the date and percentages
+    # date = date_percentages_clean[0]
+    percentages = date_percentages_clean[1:]
+
+    if (index == 1):
+        # percentages.append("0,0%")
+        # percentages.append("0,0%")
+        percentages.insert(0, "0.0%")
+        percentages.insert(0, "0.0%")  
+        percentages.insert(0, "0.0%")
+        # percentages.insert(0, "0,0%")  
+    
+    # Create a DataFrame
+    df = pd.DataFrame([percentages], columns=data_headers_clean[1:])
+    # df.insert(0, 'Date', date)
+    df = df.T
+    df = df.reset_index()
+    df.columns = ['Rates', 'Percentage']
+    return df
+
+#FUNCTION THAT TAKES A probabilities_scrapped_raw STRING IN PARAMETER AND RETURNS THE DATE OF THIS STRING
+    #Parameters : probabilities_scrapped_raw : the probabilities_scrapped_raw string
+    #Return example : 13/12/2023
+def DataSpliterDate(probabilities_scrapped_raw): # Split the data into date and percentage
+    date_probabilities = probabilities_scrapped_raw[0].split(" ")
+    # Extract the date
+    returned_date = date_probabilities[0]
+    return returned_date
+
+def dfRatesMerger():
+
+    scrapped_data_from_website_df  = get_meeting_dates()
+
+    Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
+
+    #For each meeting date...
+    for i in [9, 8, 7, 6, 5, 4, 3, 2, 1]:
+
+        #Get the raw header
+        header_scrapped_raw = scrapped_data_from_website_df.iloc[0,0]
+        #Get the raw probabilities
+        probabilities_scrapped_raw = scrapped_data_from_website_df.iloc[i,0] 
+
+        #Delete the "MEETING" frome the header of the retrieve table
+        header_scrapped_raw = header_scrapped_raw[8:]
+
+        #Retransform the raw probabilities in a clean dataframe
+        transformed_dateframe_of_specific_meeting_date = dataSlicer([header_scrapped_raw], [probabilities_scrapped_raw], i) #for loop on 1
+        Date_of_specific_meeting_date = DataSpliterDate([probabilities_scrapped_raw])
+
+        #Merge the clean dataframe with the default rate interval
+        Rates_df=pd.merge(transformed_dateframe_of_specific_meeting_date,Rates_df, how='right', on='Rates')
+
+        #Format final table
+        Rates_df.rename(columns={'Percentage': Date_of_specific_meeting_date}, inplace=True)
+        Rates_df = Rates_df.fillna("0,0%")
         
-        #Click on the "Probabilities" component which ID is "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"
-        folder_Click = driver_Click.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree")
-        folder_Click.click()
+    return Rates_df
 
-        #Gives an implicit wait for 5 seconds so that the QuickStrike table can load
-        driver_Click.implicitly_wait(2) 
+# Scale Y axis by 0.25
+def make_increment(start, end, num_steps):
+    return [start + i * (end - start) / (num_steps - 1) for i in range(num_steps)]
 
-        df = pd.DataFrame()
-
-        #Get data from the QuickStrike table and stores it in the df
-        for i in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]:
-
-            ligne_selectionnee = "ligne" + str(i)
-            current_xpath = "/html[1]/body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/table[2]/tbody[1]/tr[" + str(i) + "]"
-            ligne_selectionnee = driver_Click.find_element(By.XPATH, current_xpath).text
-
-            current_df=pd.DataFrame({ligne_selectionnee})
-            
-            df = pd.concat([df, current_df], ignore_index=True)
-        driver_Click.quit()
-        return df
-
+datascrapping_FED():
+    
     raw_data_from_website_df  = get_meeting_dates()
 
     scrapped_data_from_website_df = raw_data_from_website_df
 
     # print(scrapped_data_from_website_df.iloc[0,0], "\n") #OUTPUT : MEETING DATE 350-375 375-400 400-425 425-450 450-475 475-500 500-525 525-550 550-575 575-600
-
-    #FUNCTION TO TRANSFORM ONE LINE OF THE probabilities_scrapped_raw string in a transposed dataframe
-        #Parameters : 
-            # - dataheader : the header_scrapped_raw string
-            # - data_probabilities : the probabilities_scrapped_raw string
-            # - index : a binary index to know if the data is the first one and to add two 0 to counter the default of the initial targetted QuickStrike table
-        #Return : the slice dataframe corresponding to a specific date
-        #Return example : 
-        # Rates Percentage
-        # 0  350-375       0,0%
-        # 1  375-400       0,0%
-        # 2  400-425       0,0%
-        # 3  425-450       0,0%
-        # 4  450-475       0,0%
-        # 5  475-500      95,5%
-        # 6  500-525       4,5%
-        # 7  525-550       0,0%
-        # 8  550-575          0
-        # 9  575-600          0
-    def dataSlicer(data_headers_raw, data_probabilities_raw, index):
-        #Split the data into date and percentages
-        data_headers_clean = data_headers_raw[0].split(" ")
-        date_percentages_clean = data_probabilities_raw[0].split(" ")
-
-        #Extract the date and percentages
-        # date = date_percentages_clean[0]
-        percentages = date_percentages_clean[1:]
-
-        if (index == 1):
-            # percentages.append("0,0%")
-            # percentages.append("0,0%")
-            percentages.insert(0, "0.0%")
-            percentages.insert(0, "0.0%")  
-            percentages.insert(0, "0.0%")
-            # percentages.insert(0, "0,0%")  
-        
-        # Create a DataFrame
-        df = pd.DataFrame([percentages], columns=data_headers_clean[1:])
-        # df.insert(0, 'Date', date)
-        df = df.T
-        df = df.reset_index()
-        df.columns = ['Rates', 'Percentage']
-        return df
-
-    #FUNCTION THAT TAKES A probabilities_scrapped_raw STRING IN PARAMETER AND RETURNS THE DATE OF THIS STRING
-        #Parameters : probabilities_scrapped_raw : the probabilities_scrapped_raw string
-        #Return example : 13/12/2023
-    def DataSpliterDate(probabilities_scrapped_raw): # Split the data into date and percentage
-        date_probabilities = probabilities_scrapped_raw[0].split(" ")
-        # Extract the date
-        returned_date = date_probabilities[0]
-        return returned_date
-
-    def dfRatesMerger():
-
-        scrapped_data_from_website_df  = get_meeting_dates()
-
-        Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
-
-        #For each meeting date...
-        for i in [9, 8, 7, 6, 5, 4, 3, 2, 1]:
-
-            #Get the raw header
-            header_scrapped_raw = scrapped_data_from_website_df.iloc[0,0]
-            #Get the raw probabilities
-            probabilities_scrapped_raw = scrapped_data_from_website_df.iloc[i,0] 
-
-            #Delete the "MEETING" frome the header of the retrieve table
-            header_scrapped_raw = header_scrapped_raw[8:]
-
-            #Retransform the raw probabilities in a clean dataframe
-            transformed_dateframe_of_specific_meeting_date = dataSlicer([header_scrapped_raw], [probabilities_scrapped_raw], i) #for loop on 1
-            Date_of_specific_meeting_date = DataSpliterDate([probabilities_scrapped_raw])
-
-            #Merge the clean dataframe with the default rate interval
-            Rates_df=pd.merge(transformed_dateframe_of_specific_meeting_date,Rates_df, how='right', on='Rates')
-
-            #Format final table
-            Rates_df.rename(columns={'Percentage': Date_of_specific_meeting_date}, inplace=True)
-            Rates_df = Rates_df.fillna("0,0%")
-            
-        return Rates_df
 
     final_df = dfRatesMerger()
     # final_df
@@ -220,8 +225,6 @@ datascrapping_FED():
             return value
         else:
             return x
-        
-
 
     dataframe_from_database = dataframe_from_database.map(convert_percentage)
 
@@ -294,10 +297,6 @@ datascrapping_FED():
     plt.title('Projected rates')
     plt.grid(True)
 
-    # Scale Y axis by 0.25
-    def make_increment(start, end, num_steps):
-        return [start + i * (end - start) / (num_steps - 1) for i in range(num_steps)]
-
     max_value = df_to_display_in_graph['Upper range rate'].max()
     min_value = df_to_display_in_graph['Upper range rate'].min()
     increment_values = make_increment(max_value+0.25, min_value-0.25, int((max_value-min_value)/0.25)+3)
@@ -327,9 +326,9 @@ datascrapping_FED():
     # print(data)
 
     # st.write(final_scrapped_df)
-    st.write(json_data)
-    st.write(type(json_data))
-    st.pyplot(plt)
+    # st.write(json_data)
+    # st.write(type(json_data))
+    # st.pyplot(plt)
 
     # backend.database.insertdata(json_data)
 
