@@ -9,7 +9,7 @@ def lauchautomatedquery():
     while i<5:
         # now = datetime.datetime.now()
         # now = now.replace(hour=now.hour + 1)
-        # formatted_time = now.strftime("%H:%M:%S")
+        # formatted_time = now.strftime("%H:%M:%S"):
 
         json_data = pages.ProjectedFEDrates.datascrapping_FED()
         backend.database.insertdata(json_data)
