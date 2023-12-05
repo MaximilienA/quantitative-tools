@@ -308,8 +308,8 @@ while i<10:
     plt.show()
 
     now = datetime.datetime.now()
-    # now = now.replace(hour=now.hour + 1)
-    now = now.replace(hour=now.hour -23)
+    now = now.replace(hour=now.hour + 1)
+    # now = now.replace(hour=now.hour -23)
     formatted_time = now.strftime("%H:%M:%S")
 
     json_data = final_scrapped_df.to_json(orient='table', compression='dict')
