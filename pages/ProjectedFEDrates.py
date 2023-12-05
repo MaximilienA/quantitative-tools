@@ -188,7 +188,7 @@ def dfRatesMerger():
 def make_increment(start, end, num_steps):
     return [start + i * (end - start) / (num_steps - 1) for i in range(num_steps)]
 
-datascrapping_FED():
+def datascrapping_FED():
     
     raw_data_from_website_df  = get_meeting_dates()
 
