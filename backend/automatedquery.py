@@ -11,7 +11,7 @@ def lauchautomatedquery():
         # now = now.replace(hour=now.hour + 1)
         # formatted_time = now.strftime("%H:%M:%S")
 
-        json_data = datascrapping_FED()
+        json_data = pages.ProjectedFEDrates.datascrapping_FED()
         backend.database.insertdata(json_data)
 
         time.sleep(60)
