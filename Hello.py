@@ -20,7 +20,7 @@ import time
 
 import backend.database
 import backend.automatedquery
-import pages.ProjectedFEDrates
+# import pages.projectedfedrates
 
 
 LOGGER = get_logger(__name__)
