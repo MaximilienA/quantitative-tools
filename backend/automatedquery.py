@@ -35,7 +35,7 @@ def lauchautomatedquerytestAlice():
         i += 1
 
 i = 0
-while i<5:
+while i<10:
     # now = datetime.datetime.now()
     # now = now.replace(hour=now.hour + 1)
     # formatted_time = now.strftime("%H:%M:%S"):
@@ -43,5 +43,5 @@ while i<5:
     json_data = backend.projectedfedrates.datascrapping_FED()
     backend.database.insertdata(json_data)
 
-    time.sleep(120)
+    time.sleep(60)
     i += 1
