@@ -5,8 +5,7 @@ import pandas as pd
 import backend.projectedfedrates
 
 def lauchautomatedquery():
-    i = 0
-    while i<1:
+    for i in [0,1]: 
         # now = datetime.datetime.now()
         # now = now.replace(hour=now.hour + 1)
         # formatted_time = now.strftime("%H:%M:%S"):
@@ -15,11 +14,9 @@ def lauchautomatedquery():
         backend.database.insertdata(json_data)
 
         time.sleep(1)
-        i += 1
 
 def lauchautomatedquerytestAlice():
-    i = 0
-    while i<5:
+    for i in [0,1]:
         now = datetime.datetime.now()
         now = now.replace(hour=now.hour + 1)
         formatted_time = now.strftime("%H:%M:%S")
@@ -32,10 +29,8 @@ def lauchautomatedquerytestAlice():
         backend.database.insertdata(json_data)
 
         time.sleep(3)
-        i += 1
 
-i = 0
-while i<5:
+for i in [0,1]:
     # now = datetime.datetime.now()
     # now = now.replace(hour=now.hour + 1)
     # formatted_time = now.strftime("%H:%M:%S"):
@@ -43,5 +38,4 @@ while i<5:
     json_data = backend.projectedfedrates.datascrapping_FED()
     backend.database.insertdata(json_data)
 
-    time.sleep(60)
-    i += 1
+    time.sleep(1)
