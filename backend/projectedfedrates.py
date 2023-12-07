@@ -24,7 +24,8 @@ import backend.database
         #Return : the URL of the targetted webpage
 def get_url():
     options = Options()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')   
+    options.set_headless()
 
     driver = webdriver.Firefox(
         options=options, 
@@ -63,7 +64,8 @@ def get_url():
     # 8	07/11/2024 0,0% 0,7% 5,7% 18,4% 30,4% 27,6% 13...
 def get_meeting_dates():
     options = Options()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
+    options.set_headless()
 
     driver = webdriver.Firefox(
         options=options, 
