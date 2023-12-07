@@ -28,7 +28,7 @@ def lauchautomatedquerytestAlice():
         json_data = df.to_json(orient='records')
         backend.database.insertdata(json_data)
 
-        time.sleep(3)
+        time.sleep(1)
 
 for i in [0,1]:
     # now = datetime.datetime.now()

@@ -30,7 +30,7 @@ def get_url():
         options=options, 
     )
 
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(2)
 
     #OPEN FIRST URL AND GET SECOND URL
     driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
@@ -69,7 +69,7 @@ def get_meeting_dates():
         options=options, 
     )
 
-    # driver.implicitly_wait(1)
+    # driver.implicitly_wait(2)
     
     URL = get_url()
     # print(URL)
