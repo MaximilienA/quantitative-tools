@@ -24,13 +24,13 @@ import backend.database
         #Return : the URL of the targetted webpage
 def get_url():
     options = Options()
-    options.add_argument("--headless")   
+    options.add_argument("--headless=new")   
 
     driver = webdriver.Firefox(
         options=options, 
     )
 
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(5)
 
     #OPEN FIRST URL AND GET SECOND URL
     driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
