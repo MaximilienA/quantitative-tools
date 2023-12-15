@@ -19,10 +19,10 @@ from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.options import Options
 import backend.database
 
-st.set_page_config(
-        page_title="Data scrapping : projected FED rate",
-)
 
+def run():
+    st.set_page_config(page_title="Data scrapping : projected FED rate",)
+    
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED FIREFOW WINDOW =====
         #Parameters : no parameters
         #Return : the URL of the targetted webpage (.aspx page)

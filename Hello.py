@@ -37,7 +37,7 @@ def run():
     st.markdown(
         """
         This website is made with the python package Streamlit.\n
-        Select a page from the sidebar the result of the code available on my Github repository
+        Select a page from the sidebar to see the result of the code available on my Github repository
         """
     )
 
