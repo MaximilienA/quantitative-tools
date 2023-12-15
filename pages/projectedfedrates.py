@@ -130,12 +130,10 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
     percentages = date_percentages_clean[1:]
 
     if (index == 1):
-        # percentages.append("0,0%")
-        # percentages.append("0,0%")
         percentages.insert(0, "0.0%")
         percentages.insert(0, "0.0%")  
         percentages.insert(0, "0.0%")
-        # percentages.insert(0, "0.0%")  
+        percentages.insert(0, "0.0%")  
     
     # Create a DataFrame
     df = pd.DataFrame([percentages], columns=data_headers_clean[1:])
