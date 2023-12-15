@@ -311,3 +311,4 @@ def datascrapping_FED():
     #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
     return json_data
 
+datascrapping_FED()
