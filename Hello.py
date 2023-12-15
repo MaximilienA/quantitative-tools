@@ -28,7 +28,6 @@ LOGGER = get_logger(__name__)
 
 def run():
     print("Test Run Hello")
-    st.page_title("New Page Title")
     st.set_page_config(
         page_title="Quantitative tools",
         page_icon="👋",
