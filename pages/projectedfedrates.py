@@ -19,9 +19,13 @@ from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.firefox.options import Options
 import backend.database
 
-# ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED CHROME WINDOW =====
+st.set_page_config(
+        page_title="Data scrapping : projected FED rate",
+)
+
+# ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED FIREFOW WINDOW =====
         #Parameters : no parameters
-        #Return : the URL of the targetted webpage
+        #Return : the URL of the targetted webpage (.aspx page)
 def get_url():
     options = Options()
     options.add_argument("--headless")   
@@ -30,28 +34,29 @@ def get_url():
         options=options, 
     )
 
-    driver.implicitly_wait(5)
+    #Gives an implicit wait for 2 seconds so that elements can load
+    driver.implicitly_wait(2)
 
-    #OPEN FIRST URL AND GET SECOND URL
+    #Open first URL
     driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates"
             "/countdown-to-fomc.html")
 
     #Switch to area cmeIframe-jtxelq2f
     driver.switch_to.frame(driver.find_element(By.ID, "cmeIframe-jtxelq2f"))
 
-    #Find the element Form1 -> correspond to the Quickstrike window integrated to the website
+    #Find the element Form1 -> correspond to the Quickstrike window integrated to the website (.aspx page)
     folder = driver.find_element(By.ID, "Form1")
 
-    #Get the URL of the targetted QuickStrike table
+    #Get the URL of the targetted QuickStrike .aspx page
     URL = folder.get_property('action')
     driver.quit()
 
     return URL
 
-# ===== FUNCTION THAT SCRAPS THE DATA FROM THE WEBPAGE OF THE TARGETTED URL =====
+# ===== FUNCTION THAT SCRAPS THE DATA FROM THE .ASPX WEBPAGE WITH THE TARGETTED URL =====
     #Parameters : no parameters
     #Return : a dataframe of the targetted table of the targetted URL
-    #OUTPUT example: 
+    #Output example: 
     # 0	MEETING DATE 350-375 375-400 400-425 425-450 4...
     # 1	13/12/2023 0,0% 0,0% 0,0% 0,0% 0,0% 95,5% 4,5%...
     # 2	31/01/2024 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% 0,0% ...
@@ -68,13 +73,10 @@ def get_meeting_dates():
     driver = webdriver.Firefox(
         options=options, 
     )
-
-    # driver.implicitly_wait(2)
     
     URL = get_url()
-    # print(URL)
 
-    #CREATE SECOND DRIVER TO OPEN SECOND URL AND CLICK BUTTON 
+    # Create second driver to open second URL and click on "Probalilities" button
     driver_Click = webdriver.Firefox(options=options)
 
     #Open a new window with the taragetted QuickStrike URL we juste get from the previous get_url function 
@@ -84,31 +86,30 @@ def get_meeting_dates():
     folder_Click = driver_Click.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree")
     folder_Click.click()
 
-    #Gives an implicit wait for 5 seconds so that the QuickStrike table can load
-    driver_Click.implicitly_wait(5) 
+    #Gives an implicit wait for 2 seconds so that the QuickStrike table can load
+    driver_Click.implicitly_wait(2) 
 
     df = pd.DataFrame()
 
     #Get data from the QuickStrike table and stores it in the df
     for i in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]:
 
-        ligne_selectionnee = "ligne" + str(i)
+        selected_row = "ligne" + str(i)
         current_xpath = "/html[1]/body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/table[2]/tbody[1]/tr[" + str(i) + "]"
-        ligne_selectionnee = driver_Click.find_element(By.XPATH, current_xpath).text
-
-        current_df=pd.DataFrame({ligne_selectionnee})
-        
+        selected_row = driver_Click.find_element(By.XPATH, current_xpath).text
+        current_df=pd.DataFrame({selected_row})
         df = pd.concat([df, current_df], ignore_index=True)
+    
     driver_Click.quit()
     return df
 
-#FUNCTION TO TRANSFORM ONE LINE OF THE probabilities_scrapped_raw string in a transposed dataframe
+# ===== FUNCTION TO TRANSFORM ONE LINE OF THE probabilities_scrapped_raw STRING IN A TRANSPOSED DATAFRAME ===== 
     #Parameters : 
         # - dataheader : the header_scrapped_raw string
         # - data_probabilities : the probabilities_scrapped_raw string
         # - index : a binary index to know if the data is the first one and to add two 0 to counter the default of the initial targetted QuickStrike table
-    #Return : the slice dataframe corresponding to a specific date
-    #Return example : 
+    #Return : the sliced dataframe corresponding to a specific date
+    #Output example : 
     # Rates Percentage
     # 0  350-375       0,0%
     # 1  375-400       0,0%
@@ -126,7 +127,6 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
     date_percentages_clean = data_probabilities_raw[0].split(" ")
 
     #Extract the date and percentages
-    # date = date_percentages_clean[0]
     percentages = date_percentages_clean[1:]
 
     if (index == 1):
@@ -145,7 +145,7 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
     df.columns = ['Rates', 'Percentage']
     return df
 
-#FUNCTION THAT TAKES A probabilities_scrapped_raw STRING IN PARAMETER AND RETURNS THE DATE OF THIS STRING
+# ===== FUNCTION THAT TAKES A probabilities_scrapped_raw STRING AS PARAMETER AND RETURNS THE DATE OF THIS STRING ===== 
     #Parameters : probabilities_scrapped_raw : the probabilities_scrapped_raw string
     #Return example : 13/12/2023
 def DataSpliterDate(probabilities_scrapped_raw): # Split the data into date and percentage
@@ -154,25 +154,28 @@ def DataSpliterDate(probabilities_scrapped_raw): # Split the data into date and 
     returned_date = date_probabilities[0]
     return returned_date
 
+# ===== FINAL FUNCTION THAT CALLS PREVIOUS FUNCTION ===== 
 def dfRatesMerger():
+    
+    #Dataframe of every rate range the FED can set as new current interest rate range
+    Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
 
     scrapped_data_from_website_df  = get_meeting_dates()
-
-    Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
 
     #For each meeting date...
     for i in [9, 8, 7, 6, 5, 4, 3, 2, 1]:
 
         #Get the raw header
         header_scrapped_raw = scrapped_data_from_website_df.iloc[0,0]
+
         #Get the raw probabilities
         probabilities_scrapped_raw = scrapped_data_from_website_df.iloc[i,0] 
 
-        #Delete the "MEETING" frome the header of the retrieve table
+        #Delete the "MEETING" frome the header of the retrieved table
         header_scrapped_raw = header_scrapped_raw[8:]
 
         #Retransform the raw probabilities in a clean dataframe
-        transformed_dateframe_of_specific_meeting_date = dataSlicer([header_scrapped_raw], [probabilities_scrapped_raw], i) #for loop on 1
+        transformed_dateframe_of_specific_meeting_date = dataSlicer([header_scrapped_raw], [probabilities_scrapped_raw], i)
         Date_of_specific_meeting_date = DataSpliterDate([probabilities_scrapped_raw])
 
         #Merge the clean dataframe with the default rate interval
@@ -194,8 +197,6 @@ def datascrapping_FED():
 
     scrapped_data_from_website_df = raw_data_from_website_df
 
-    # print(scrapped_data_from_website_df.iloc[0,0], "\n") #OUTPUT : MEETING DATE 350-375 375-400 400-425 425-450 450-475 475-500 500-525 525-550 550-575 575-600
-
     final_df = dfRatesMerger()
     # final_df
     final_df.replace('0,0%', 0, inplace=True)
@@ -203,9 +204,7 @@ def datascrapping_FED():
 
     final_df.columns = final_df.iloc[0]
     final_df = final_df.iloc[1:] 
-    # final_df 
     final_scrapped_df = final_df
-    # final_scrapped_df #dataframe à mettre en BDD
     print("final_scrapped_df", final_scrapped_df)
 
     dataframe_from_database = final_scrapped_df
@@ -216,9 +215,7 @@ def datascrapping_FED():
             return value
         else:
             return x
-
-    # final = final.applymap(convert_percentage)
-
+        
     def divide_100(x):
         if isinstance(x, str):
             value = x
@@ -238,11 +235,6 @@ def datascrapping_FED():
         except:
             pass
 
-    # print("final.columns", dataframe_from_database.columns, "\n")
-    # print("type(final.columns)", type(dataframe_from_database.columns), "\n")
-
-    # dataframe_from_database
-
     # Define the range values
     ranges = dataframe_from_database.columns
 
@@ -260,11 +252,7 @@ def datascrapping_FED():
         # Add the midpoint to the list of midpoints
         midpoints.append(midpoint)
 
-    # print(midpoints, "\n")
-
     dataframe_from_database.columns = midpoints
-
-    # dataframe_from_database
 
     selected_columns = [dataframe_from_database.columns[0], dataframe_from_database.columns[1], dataframe_from_database.columns[2], dataframe_from_database.columns[3], dataframe_from_database.columns[4], dataframe_from_database.columns[5], dataframe_from_database.columns[6], dataframe_from_database.columns[7], dataframe_from_database.columns[8]]
 
@@ -272,21 +260,10 @@ def datascrapping_FED():
 
     max_values = dataframe_from_database.max(axis=1)
 
-    # print("max_values", max_values, "\n")
-
-    # # Print the indices of the maximum values in each row
-    # max_values_indices
-
-    # type(max_values_indices)
-
-    # max_values_indices
-
     df_to_display_in_graph = max_values_indices.to_frame()
     df_to_display_in_graph['Probabilities']=(max_values)
-    # Print the DataFrame
-    # print(df_to_display_in_graph)
+
     df_to_display_in_graph.columns = ['Upper range rate', 'Probabilities']
-    # df_to_display_in_graph
 
     # ===== PYPLOT =====
     # Create the line graph
@@ -306,7 +283,6 @@ def datascrapping_FED():
 
     now = datetime.datetime.now()
     now = now.replace(hour=now.hour + 1)
-    # now = now.replace(hour=now.hour -23)
     formatted_time = now.strftime("%H:%M:%S")
 
     json_data = final_scrapped_df.to_json(orient='table', compression='dict')
@@ -325,10 +301,10 @@ def datascrapping_FED():
 
     # print(data)
 
-    # st.write(final_scrapped_df)
     # st.write(json_data)
     # st.write(type(json_data))
-    # st.pyplot(plt)
+    st.pyplot(plt)
+    st.write(final_scrapped_df)
 
     # backend.database.insertdata(json_data)
 

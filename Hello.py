@@ -27,7 +27,6 @@ LOGGER = get_logger(__name__)
 
 
 def run():
-    print("Test Run Hello")
     st.set_page_config(
         page_title="Quantitative tools",
         page_icon="👋",
@@ -35,24 +34,16 @@ def run():
 
     st.write("# Welcome to Quantitative tools!")
     
-
     st.markdown(
         """
-        This website is made with the python package Streamlit.
-        Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-    """
-    
+        This website is made with the python package Streamlit.\n
+        Select a page from the sidebar the result of the code available on my Github repository
+        """
     )
 
-    start_automatedquery = st.button("Start/stop automated Firebase query")
-
-    if (start_automatedquery):
-        backend.automatedquery.lauchautomatedquery() #test
-    else:
-        st.write("End automated query")
+    # ===== TESTING AUTOMATED FIREBASE QUERY ===== 
+    # start_automatedquery = st.button("Start/stop automated Firebase query")
         
-
 
 if __name__ == "__main__":
     run()
