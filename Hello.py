@@ -28,6 +28,7 @@ LOGGER = get_logger(__name__)
 
 def run():
     print("Test Run Hello")
+    st.page_title("New Page Title")
     st.set_page_config(
         page_title="Quantitative tools",
         page_icon="👋",
@@ -38,9 +39,8 @@ def run():
 
     st.markdown(
         """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
+        This website is made with the python package Streamlit.
+        Select a demo from the sidebar** to see some examples
         of what Streamlit can do!
     """
     

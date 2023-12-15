@@ -2,7 +2,7 @@ import datetime
 import time
 import backend.database
 import pandas as pd
-import backend.projectedfedrates
+import pages.projectedfedrates
 
 def lauchautomatedquery():
     for i in [0,1]: 
@@ -10,7 +10,7 @@ def lauchautomatedquery():
         # now = now.replace(hour=now.hour + 1)
         # formatted_time = now.strftime("%H:%M:%S"):
 
-        json_data = backend.projectedfedrates.datascrapping_FED()
+        json_data = pages.projectedfedrates.datascrapping_FED()
         backend.database.insertdata(json_data)
 
         time.sleep(1)
