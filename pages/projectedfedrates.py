@@ -95,7 +95,9 @@ def get_meeting_dates():
     for i in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]:
 
         selected_row = "ligne" + str(i)
-        current_xpath = "/html[1]/body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/table[2]/tbody[1]/tr[" + str(i) + "]"
+        current_xpath = "/html/body/form/div[3]/div[2]/div[3]/div[1]/div/div/div[1]/div/div[3]/div[3]/div/div/table[2]/tbody/tr[3]//tr[" + str(i) + "]"
+
+        # current_xpath = "/html[1]/body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/table[2]/tbody[1]/tr[" + str(i) + "]"
         selected_row = driver_Click.find_element(By.XPATH, current_xpath).text
         current_df=pd.DataFrame({selected_row})
         df = pd.concat([df, current_df], ignore_index=True)
@@ -130,7 +132,7 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
     percentages = date_percentages_clean[1:]
 
     if (index == 1):
-        percentages.insert(0, "0.0%")
+        # percentages.insert(0, "0.0%")
         percentages.insert(0, "0.0%")  
         percentages.insert(0, "0.0%")
         percentages.insert(0, "0.0%")  
@@ -302,7 +304,7 @@ def datascrapping_FED():
     # st.write(json_data)
     # st.write(type(json_data))
     st.pyplot(plt)
-    st.write(final_scrapped_df)
+    # st.write(final_scrapped_df)
 
     # backend.database.insertdata(json_data)
 
