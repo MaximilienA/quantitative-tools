@@ -103,10 +103,10 @@ def get_probabilities():
     result_df = df['value']
     return result_df
 
-df_scrapped_data_from_website = get_probabilities()
+# df_scrapped_data_from_website = get_probabilities()
 
-df_buffer_scrapped_data_from_website = df_scrapped_data_from_website
-df_buffer_scrapped_data_from_website
+# df_buffer_scrapped_data_from_website = df_scrapped_data_from_website
+# df_buffer_scrapped_data_from_website
 
 # ===== FUNCTION THAT TAKES A probabilities_scrapped_raw STRING IN PARAMETER AND RETURNS THE DATE OF THIS STRING ===== 
     #Parameters : probabilities_scrapped_raw : the probabilities_scrapped_raw string
