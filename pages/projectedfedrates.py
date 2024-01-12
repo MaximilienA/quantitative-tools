@@ -29,8 +29,7 @@ import backend.database
 #     st.set_page_config(page_title="Data scrapping : projected FED rate",)
 
 with st.spinner('Scrapping data...'):
-    time.sleep(20)
-st.success('Done!')
+    time.sleep(60)
 
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE IN A SIMULATED HEADLESS FIREFOX WINDOW AND RETURNS THE VALUES IN THE TABLE =====
     # Parameters : no parameters
@@ -278,7 +277,7 @@ def transformReworkedDataframeToDisplayableDataframe(dataframe_from_database):
 
 df_to_display_in_graph = transformReworkedDataframeToDisplayableDataframe(dataframe_from_database)
 
-df_to_display_in_graph
+# df_to_display_in_graph
 
 # ===== PYPLOT =====
 # Create the line graph
