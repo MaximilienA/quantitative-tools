@@ -283,9 +283,9 @@ df_to_display_in_graph = transformReworkedDataframeToDisplayableDataframe(datafr
 # Create the line graph
 plt.figure(figsize=(16, 6))
 plt.plot(df_to_display_in_graph.index, df_to_display_in_graph['Upper range rate'], marker='o', linestyle='-')
-plt.xlabel('Date')
+plt.xlabel('Meeting dates')
 plt.ylabel('Upper range rate')
-plt.title('Projected rates')
+plt.title('Projected FED rates for upcoming meeting dates')
 plt.grid(True)
 
 # Scale Y axis by 0.25
