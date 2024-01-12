@@ -7,6 +7,8 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
+import time
+
 
 import pandas as pd
 import plotly.graph_objects as go
@@ -25,7 +27,11 @@ import backend.database
 
 # def run():
 #     st.set_page_config(page_title="Data scrapping : projected FED rate",)
-    
+
+with st.spinner('Scrapping data...'):
+    time.sleep(20)
+st.success('Done!')
+
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE IN A SIMULATED HEADLESS FIREFOX WINDOW AND RETURNS THE VALUES IN THE TABLE =====
     # Parameters : no parameters
     # Return : dataframe of the values of the table (header and the 8 rows)
