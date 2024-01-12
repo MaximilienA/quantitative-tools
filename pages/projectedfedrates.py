@@ -261,7 +261,7 @@ def transformReworkedDataframeToDisplayableDataframe(dataframe_from_database):
     df_to_display_in_graph.columns = ['Upper range rate','Probabilities']
     return df_to_display_in_graph
 
-df_to_display_in_graph = transformReworkedDataframeToDisplayableDataframe(dataframe_from_database)
+df_to_display_in_graph = transformReworkedDataframeToDisplayableDataframe()
 
 df_to_display_in_graph
 
