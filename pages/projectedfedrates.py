@@ -26,9 +26,6 @@ import backend.database
 # def run():
 #     st.set_page_config(page_title="Data scrapping : projected FED rate",)
     
-# ===== FUNCTION THAT OPEN THE BASE WEBPAGE AND LOOKS FOR THE TARGETTED WEBPAGE IN A SIMULATED FIREFOW WINDOW =====
-        #Parameters : no parameters
-        #Return : the URL of the targetted webpage (.aspx page)
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE IN A SIMULATED HEADLESS FIREFOX WINDOW AND RETURNS THE VALUES IN THE TABLE =====
     # Parameters : no parameters
     # Return : dataframe of the values of the table (header and the 8 rows)
@@ -106,9 +103,14 @@ def get_probabilities():
     result_df = df['value']
     return result_df
 
+df_scrapped_data_from_website = get_probabilities()
+
+df_buffer_scrapped_data_from_website = df_scrapped_data_from_website
+df_buffer_scrapped_data_from_website
+
 # ===== FUNCTION THAT TAKES A probabilities_scrapped_raw STRING IN PARAMETER AND RETURNS THE DATE OF THIS STRING ===== 
-#Parameters : probabilities_scrapped_raw : the probabilities_scrapped_raw string
-#Return example : 13/12/2023
+    #Parameters : probabilities_scrapped_raw : the probabilities_scrapped_raw string
+    #Return example : 13/12/2023
 def dataSpliterDate(probabilities_scrapped_raw): # Split the data into date and percentage
     date_probabilities = probabilities_scrapped_raw[0].split(" ")
     # Extract the date
@@ -188,6 +190,12 @@ def dfRatesMerger():
     Rates_df = Rates_df.iloc[1:]         
     return Rates_df
 
+final_df = dfRatesMerger()
+
+final_scrapped_df = final_df
+
+dataframe_from_database = final_scrapped_df
+
 #Map function to replace European percentage type values in decimal type values : the percentage '65.0%' will be converted to '68.5 and '0,00' will be converted to '0'
 def convert_percentage(x):
     if isinstance(x, str):
@@ -261,7 +269,7 @@ def transformReworkedDataframeToDisplayableDataframe(dataframe_from_database):
     df_to_display_in_graph.columns = ['Upper range rate','Probabilities']
     return df_to_display_in_graph
 
-df_to_display_in_graph = transformReworkedDataframeToDisplayableDataframe()
+df_to_display_in_graph = transformReworkedDataframeToDisplayableDataframe(dataframe_from_database)
 
 df_to_display_in_graph
 
@@ -285,6 +293,7 @@ plt.gca().set_yticks(increment_values)
 
 plt.show()
 
+st.pyplot(plt)
 
     # ===== DATABASE =====
     # now = datetime.datetime.now()
@@ -317,4 +326,3 @@ plt.show()
     #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
     # return json_data
 
-st.pyplot(plt)
