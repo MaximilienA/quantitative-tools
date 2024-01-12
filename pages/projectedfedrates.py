@@ -99,6 +99,7 @@ def get_probabilities():
 
     # df = pd.concat([df, current_df], ignore_index=True)
     driver_Click.quit()
+    driver.quit()
     df = pd.melt(df, value_vars=df.columns)
     result_df = df['value']
     return result_df
