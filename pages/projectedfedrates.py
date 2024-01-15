@@ -46,6 +46,9 @@ with st.spinner('Scrapping data...'):
     # 7    07/11/2024 0,0% 0,0% 1,4% 13,9% 40,0% 32,3% 10...
     # 8    18/12/2024 1,1% 11,3% 34,4% 33,9% 15,2% 3,5% 0...
 def get_probabilities():
+    now = datetime.datetime.now()
+    print("Starting data scrapping at : ", now.strftime("%H:%M:%S"))
+    st.write("Starting data scrapping at : ", now.strftime("%H:%M:%S"))
     options = Options()
     options.add_argument('--headless')
 
@@ -164,6 +167,9 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
 def dfRatesMerger():
 
     scrapped_data_from_website_df  = get_probabilities()
+    now = datetime.datetime.now()
+    print("Ending data scrapping at : ", now.strftime("%H:%M:%S"))
+    st.write("Ending data scrapping at : ", now.strftime("%H:%M:%S"))
 
     Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
 
@@ -331,4 +337,3 @@ st.pyplot(plt)
 
     #streamlit run "C:\Users\pluto\Desktop\Investissement\Python\Test courbe taux futures\SeleniumLocal.py"
     # return json_data
-
