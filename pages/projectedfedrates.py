@@ -46,7 +46,6 @@ with st.spinner('Scrapping data...'):
 def get_probabilities():
     now = datetime.datetime.now()
     print("Starting data scrapping at : ", now.strftime("%H:%M:%S"))
-    st.write(now.strftime("%H:%M:%S"))
     options = Options()
     options.add_argument('--headless')
 
