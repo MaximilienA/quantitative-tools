@@ -26,8 +26,8 @@ import backend.database
 # def run():
 #     st.set_page_config(page_title="Data scrapping : projected FED rate",)
 
-with st.spinner('Scrapping data...'):
-    time.sleep(120)
+# with st.spinner('Scrapping data...'):
+#     time.sleep(120)
 
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE IN A SIMULATED HEADLESS FIREFOX WINDOW AND RETURNS THE VALUES IN THE TABLE =====
     # Parameters : no parameters
