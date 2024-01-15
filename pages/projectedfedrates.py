@@ -1,14 +1,12 @@
 #GENERAL IMPORTS
 import pandas as pd
 import datetime as dt
-from datetime import timedelta 
-from datetime import date
+import datetime
 import yfinance as yf   
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
 import time
-
 
 import pandas as pd
 import plotly.graph_objects as go
