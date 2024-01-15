@@ -106,7 +106,6 @@ def get_probabilities():
     # df = pd.concat([df, current_df], ignore_index=True)
     
     st.write("Closing Webdriver")
-    st.write("Data ready for cleaning")
     driver_Click.quit()
     driver.quit()
     df = pd.melt(df, value_vars=df.columns)
@@ -173,6 +172,7 @@ def dfRatesMerger():
     now = datetime.datetime.now()
     print("Ending data scrapping at : ", now.strftime("%H:%M:%S"))
     st.write("Data scrapping ended")
+    st.write("Data ready for cleaning")
 
     Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
 
