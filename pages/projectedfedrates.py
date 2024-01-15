@@ -47,9 +47,11 @@ def get_probabilities():
     options = Options()
     options.add_argument('--headless')
 
+    st.write("Creating Web driver")
     driver = webdriver.Firefox(options=options)
     # driver = webdriver.Chrome(options=options)
 
+    st.write("Opening browser")
     #OPEN FIRST URL AND GET SECOND URL
     driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates/countdown-to-fomc.html")
     driver.implicitly_wait(1) 
@@ -82,6 +84,7 @@ def get_probabilities():
 
     df = pd.DataFrame()
 
+    st.write("Retriving data from target table")
     #Get data from the QuickStrike table and stores it in the df
     for i in [2, 3, 4, 5, 6, 7, 8, 9, 10]: #tr
         
@@ -101,6 +104,9 @@ def get_probabilities():
     # df.append(current_df, ignore_index=True)
 
     # df = pd.concat([df, current_df], ignore_index=True)
+    
+    st.write("Closing Webdriver")
+    st.write("Data ready for cleaning")
     driver_Click.quit()
     driver.quit()
     df = pd.melt(df, value_vars=df.columns)
