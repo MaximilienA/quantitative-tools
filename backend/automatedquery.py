@@ -6,9 +6,9 @@ import pages.projectedfedrates
 
 def lauchautomatedquery():
     for i in [0,1]: 
-        now = datetime.datetime.now()
-        now = now.replace(hour=now.hour + 1)
-        formatted_time = now.strftime("%H:%M:%S"):
+        # now = datetime.datetime.now()
+        # now = now.replace(hour=now.hour + 1)
+        # formatted_time = now.strftime("%H:%M:%S"):
 
         json_data = pages.projectedfedrates.datascrapping_FED()
         backend.database.insertdata(json_data)
