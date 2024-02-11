@@ -86,15 +86,16 @@ def get_probabilities():
 
     st.write("Retriving data from target table")
     #Get data from the QuickStrike table and stores it in the df
-    for i in [2, 3, 4, 5, 6, 7, 8, 9, 10]: #tr
-        
-        current_xpath = "/html/body/form/div[3]/div[2]/div[3]/div[1]/div/div/div[1]/div/div[3]/div[3]/div/div/table[2]/tbody/tr[" + str(i) + "]"
-
-        selected_row = driver_Click.find_element(By.XPATH, current_xpath).text
-
-        current_df=pd.DataFrame({selected_row})
-
-        df = pd.concat([df, current_df], ignore_index=True)
+    for i in range(2,15): #tr
+        try:        
+            current_xpath = "/html/body/form/div[3]/div[2]/div[3]/div[1]/div/div/div[1]/div/div[3]/div[3]/div/div/table[2]/tbody/tr[" + str(i) + "]"
+            selected_row = driver_Click.find_element(By.XPATH, current_xpath).text
+            print(selected_row)
+            current_df=pd.DataFrame({selected_row})
+            df = pd.concat([df, current_df], ignore_index=True)
+            # print(i)
+        except:
+            break
         # df.iloc[i, j] = selected_row
             
     # df = df.set_index(['row', 'col'])   
@@ -116,6 +117,7 @@ def get_probabilities():
 
 # df_buffer_scrapped_data_from_website = df_scrapped_data_from_website
 # df_buffer_scrapped_data_from_website
+
 
 # ===== FUNCTION THAT TAKES A probabilities_scrapped_raw STRING IN PARAMETER AND RETURNS THE DATE OF THIS STRING ===== 
     #Parameters : probabilities_scrapped_raw : the probabilities_scrapped_raw string
@@ -169,6 +171,8 @@ def dfRatesMerger():
     print("Starting data scrapping at : ", now.strftime("%H:%M:%S"))
     st.write("Starting data scrapping")
     scrapped_data_from_website_df  = get_probabilities()
+    numberOfMeetingDates = (len(scrapped_data_from_website_df)-1)
+    numberOfMeetingDates
     now = datetime.datetime.now()
     print("Ending data scrapping at : ", now.strftime("%H:%M:%S"))
     st.write("Data scrapping ended")
@@ -177,7 +181,7 @@ def dfRatesMerger():
     Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
 
     #For each meeting date...
-    for i in [8, 7, 6, 5, 4, 3, 2, 1]:
+    for i in range (numberOfMeetingDates, 0, -1):
 
         #Get the raw header
         header_scrapped_raw = scrapped_data_from_website_df.iloc[0]
@@ -207,6 +211,8 @@ def dfRatesMerger():
 
 final_df = dfRatesMerger()
 
+
+
 final_scrapped_df = final_df
 
 dataframe_from_database = final_scrapped_df
@@ -226,25 +232,25 @@ def convertRateRanges(dataframe_from_database):
     ranges = dataframe_from_database.columns
 
     #Convert each range to its upper rate : the rate range '475-500' will be converted to '5'
-    midpoints = []
+    upperpoints = []
     for range_str in ranges:
         # Split the range string into its two values
         values = range_str.split("-")
         start_value = int(values[0])
         end_value = int(values[1])
 
-        # Calculate the midpoint
-        midpoint = end_value /100
+        # Calculate the upperpoint
+        upperpoint = end_value /100
 
-        # Add the midpoint to the list of midpoints
-        midpoints.append(midpoint)
+        # Add the upperpoint to the list of upperpoints
+        upperpoints.append(upperpoint)
 
-    # print(midpoints, "\n")
+    # print(upperpoints, "\n")
 
-    dataframe_from_database.columns = midpoints
+    dataframe_from_database.columns = upperpoints
 
     dataframe_from_database = dataframe_from_database.T
-
+    # print(dataframe_from_database)
     return dataframe_from_database
 
 def transformReworkedDataframeToDisplayableDataframe(dataframe_from_database):
@@ -263,7 +269,9 @@ def transformReworkedDataframeToDisplayableDataframe(dataframe_from_database):
     #Convert the range value in column names to a single rate :
     dataframe_from_database = convertRateRanges(dataframe_from_database)
 
-    selected_columns = [dataframe_from_database.columns[0], dataframe_from_database.columns[1], dataframe_from_database.columns[2], dataframe_from_database.columns[3], dataframe_from_database.columns[4], dataframe_from_database.columns[5], dataframe_from_database.columns[6], dataframe_from_database.columns[7]]
+    # selected_columns = [dataframe_from_database.columns[0], dataframe_from_database.columns[1], dataframe_from_database.columns[2], dataframe_from_database.columns[3], dataframe_from_database.columns[4], dataframe_from_database.columns[5], dataframe_from_database.columns[6], dataframe_from_database.columns[7]]
+
+    selected_columns = dataframe_from_database.columns.tolist()
 
     # print("selected_columns", selected_columns, "\n")
 
