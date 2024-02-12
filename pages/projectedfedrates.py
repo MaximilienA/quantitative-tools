@@ -172,7 +172,6 @@ def dfRatesMerger():
     st.write("Starting data scrapping")
     scrapped_data_from_website_df  = get_probabilities()
     numberOfMeetingDates = (len(scrapped_data_from_website_df)-1)
-    numberOfMeetingDates
     now = datetime.datetime.now()
     print("Ending data scrapping at : ", now.strftime("%H:%M:%S"))
     st.write("Data scrapping ended")
