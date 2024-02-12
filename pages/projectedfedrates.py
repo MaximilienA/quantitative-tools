@@ -90,7 +90,7 @@ def get_probabilities():
         try:        
             current_xpath = "/html/body/form/div[3]/div[2]/div[3]/div[1]/div/div/div[1]/div/div[3]/div[3]/div/div/table[2]/tbody/tr[" + str(i) + "]"
             selected_row = driver_Click.find_element(By.XPATH, current_xpath).text
-            print(selected_row)
+            # print(selected_row)
             current_df=pd.DataFrame({selected_row})
             df = pd.concat([df, current_df], ignore_index=True)
             # print(i)
@@ -177,6 +177,7 @@ def dfRatesMerger():
     print("Ending data scrapping at : ", now.strftime("%H:%M:%S"))
     st.write("Data scrapping ended")
     st.write("Data ready for cleaning")
+    st.write("Data ready to be displayed")
 
     Rates_df = pd.DataFrame({"Rates": ["0-25",	"25-50",	"50-75",	"75-100",	"100-125",	"125-150",	"150-175",	"175-200",	"200-225",	"225-250",	"250-275",	"275-300",	"300-325",	"325-350",	"350-375",	"375-400",	"400-425",	"425-450",	"450-475",	"475-500",	"500-525",	"525-550",	"550-575",	"575-600",	"600-625",	"625-650",	"650-675",	"675-700",	"700-725",	"725-750",	"750-775",	"775-800",	"800-825",	"825-850",	"850-875",	"875-900",	"900-925",	"925-950",	"950-975",	"975-1000"]})
 
