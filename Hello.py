@@ -18,8 +18,8 @@ from streamlit.logger import get_logger
 import datetime
 import time
 
-import backend.database
-import backend.automatedquery
+# import backend.database
+# import backend.automatedquery
 # import pages.projectedfedrates
 
 
