@@ -29,6 +29,9 @@ from selenium.webdriver.common.keys import Keys
 # with st.spinner('Scrapping data...'):
 #     time.sleep(120)
 
+st.set_page_config(page_title='Projected FED rates')
+
+
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE IN A SIMULATED HEADLESS FIREFOX WINDOW AND RETURNS THE VALUES IN THE TABLE =====
     # Parameters : no parameters
     # Return : dataframe of the values of the table (header and the 8 rows)
