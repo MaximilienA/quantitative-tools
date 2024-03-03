@@ -20,7 +20,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
-# import backend.database
+import backend.database
 
 
 # def run():
@@ -320,6 +320,8 @@ plt.gca().set_yticks(increment_values)
 plt.show()
 
 st.pyplot(plt)
+
+backend.database.insertdata(final_df,'2024-03-02')
 
     # ===== DATABASE =====
     # now = datetime.datetime.now()
