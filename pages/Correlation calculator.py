@@ -7,7 +7,15 @@ import yfinance as yf
 import numpy as np
 import streamlit as st
 import plotly.graph_objects as go
+
 # import backend.database
+
+st.write("# Correlation graph")
+st.markdown(
+    """
+    ##### Retrieve data with yfinance API to display 30-day correlation between stock indexes.
+    """
+)
 
 # import plotly.express as px
 
@@ -235,12 +243,11 @@ def correlation_computer(number_days, indexNameA, indexNameB):
     # print(type(table_to_display))
     # print(table_to_display.index)
 
-    print("Finale table : ", table_to_display)
+    print("Final table : ", table_to_display)
     return table_to_display
 
 #DISPLAY GRAP ON WEBPAGE WITH STREAMLIT
 #run in a classic VSC terminal : "streamlit run c:\Users\pluto\Desktop\Investissement\Python\Correlation\Version-steamlit.py".
-st.header("Correlation graph")
 index_name_list = df_index_name["Index_name"].tolist()
 selected_name = st.selectbox("Select first index", index_name_list, index = 2)
 selected_nameB = st.selectbox("Select second index", index_name_list, index = 9)

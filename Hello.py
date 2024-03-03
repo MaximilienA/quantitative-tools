@@ -34,12 +34,9 @@ def run():
 
     st.write("# Welcome to Quantitative tools!")
     
-    st.markdown(
-        """
-        This website is made with the python package Streamlit.\n
-        Select a page from the sidebar to see the result of the code available on my Github repository
-        """
-    )
+    st.markdown('This website is made with the python package Streamlit.\n')
+    st.markdown('Select a tools from the sidebar (Correlation calculator or Projected FED rates), the code is available on my <a href="https://github.com/MaximilienA/quantitative-tools" target="_blank">Github repository</a>', unsafe_allow_html=True)
+
 
     # ===== TESTING AUTOMATED FIREBASE QUERY ===== 
     # start_automatedquery = st.button("Start/stop automated Firebase query")

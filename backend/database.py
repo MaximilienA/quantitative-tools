@@ -28,17 +28,11 @@ def insertdata(scrapped_data, date):
         ref = db.reference(database_path)
         # ref.set(scrapped_data)
         dataDict = scrapped_data.to_dict()
-        st.write(dataDict)
+        # st.write(dataDict)
         ref.set(dataDict)
 
 today = datetime.date.today()
 today = today.strftime("%Y-%m-%d")
-
-data  = [["Test", 12]]
-
-df = pd.DataFrame(data)
-
-insertdata(df,today)
 
 # def get(data)
 

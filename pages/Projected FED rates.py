@@ -29,7 +29,13 @@ from selenium.webdriver.common.keys import Keys
 # with st.spinner('Scrapping data...'):
 #     time.sleep(120)
 
-st.set_page_config(page_title='Projected FED rates')
+st.write("# Projected FED rates")
+    
+st.markdown(
+    """
+    ##### Data scrapping script retrieving projection of FED rates for the upcomming meeting dates from CME's website.
+    """
+)
 
 
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE IN A SIMULATED HEADLESS FIREFOX WINDOW AND RETURNS THE VALUES IN THE TABLE =====
