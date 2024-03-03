@@ -20,7 +20,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
-# import backend.database
+import backend.database
 
 
 # def run():
@@ -116,7 +116,7 @@ def get_probabilities():
     result_df = df['value']
     return result_df
 
-# df_scrapped_data_from_website = get_probabilities()
+df_scrapped_data_from_website = get_probabilities()
 
 # df_buffer_scrapped_data_from_website = df_scrapped_data_from_website
 # df_buffer_scrapped_data_from_website
@@ -213,7 +213,7 @@ def dfRatesMerger():
     return Rates_df
 
 final_df = dfRatesMerger()
-
+# st.write(final_df)
 
 
 final_scrapped_df = final_df
@@ -321,7 +321,14 @@ plt.show()
 
 st.pyplot(plt)
 
-# backend.database.insertdata(final_df,'2024-03-02')
+today = datetime.date.today()
+today = today.strftime("%Y-%m-%d")
+
+data  = [["Test", 12]]
+
+df = pd.DataFrame(data)
+
+backend.database.insertdata(df_scrapped_data_from_website,today)
 
     # ===== DATABASE =====
     # now = datetime.datetime.now()
