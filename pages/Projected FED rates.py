@@ -33,7 +33,7 @@ st.write("# Projected FED rates")
     
 st.markdown(
     """
-    ##### Data scrapping script retrieving projection of FED rates for the upcomming meeting dates from CME's website.
+    ##### Data scrapping script retrieving projection of FED rates for the upcoming meeting dates from CME's website.
     """
 )
 
