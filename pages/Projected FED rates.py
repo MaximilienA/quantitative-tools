@@ -97,7 +97,8 @@ def get_probabilities():
     #Get data from the QuickStrike table and stores it in the df
     for i in range(2,15): #tr
         try:        
-            current_xpath = "/html/body/form/div[3]/div[2]/div[3]/div[1]/div/div/div[1]/div/div[3]/div[3]/div/div/table[2]/tbody/tr[" + str(i) + "]"
+            current_xpath = "/html/body/form/div[3]/div[2]/div[3]/div[1]/div/div/div[1]/div/div[3]/div[3]/div/div/div[1]/table[1]/tbody/tr[" + str(i) + "]"
+            #//body[1]/form[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[4]
             selected_row = driver_Click.find_element(By.XPATH, current_xpath).text
             # print(selected_row)
             current_df=pd.DataFrame({selected_row})
