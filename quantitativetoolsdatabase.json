@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "quantitativetoolsdatabase",
+  "private_key_id": "2b65632cee8c56a5afae1f399e9e2d94d07448d4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqqhVbJTB1y5BJ\nOg0/8ElAOD18QVh7Bx7iBIpAVvh50BZ6YKeVmjVRVKFPXwYZEKEEixTqxzmncaVR\niOUZX1yNnxC/xqHTY+mtOax6KmSfJK1ZmwSFmR+YTQrFS22eBAvwkrZHh/wr9U2u\nBcUkfTV0GLGQBGZ9ob/rOCqfjRwZzciLv2MRcC6nabzQFgkExV5CdIUHwOwVyMv/\npjXc9x1LBUtkGhVcSZjDP+/G0V6NXEoaLRIkgvXRE7W8lyajZo8peFcSX86WUnuQ\nGdQzTy03k+VuW2UoF49B6s4n5A5/OEG+Lx5JT0JWzPo7vbLj06fAc1/ODoO2BSO6\nvId0RVLtAgMBAAECggEARSnTqNH7/ykFqt93YiufjAKezF3xHT7IAcHkQ2nbngY6\nLdNA50yNAg5hpzhz0LGgB6bTzcf6cgUJAe+QJQW0DQLjN00o5PHvUA/4+bN3ftVO\n2WsM3JWvK7pBPK6yWGD8c70JWRjflfL+TaGyAPUrNgcR4rMd1Bk6nXlwMKPvuPa2\ntPse7+QZCHr/yUjxE3JpQtc/HerdBoRxNBJF5LkH3AAwe2LsVUDQubdpiZa8dHni\nh2JGIsh7Gkz9/MCgMyOSWpNubd335V7eBqTr73vXMiKbSqXd8vwyU7asFwPYCPmI\nxQRf599ouHQoNrQB61dhIU5b/oE+stT2Cjf5Dgn9EwKBgQDVSfgOTrcKXm/gRohr\n+EzmDsCVnVxnaGH9xjKwc44wnNuP/OysL7zfZjXG5hJlEKVDUWnB9V7dGBTUQFjz\nOnc+L7AEt6yX0uzB6fu9+fA8FOxp6w7Ui6j5h15nShCGGdDFMJOfogcPFvJ6jmpj\nu9JI8h4IMgQI6X+kM8bJ7c0tfwKBgQDM1wMT3OgQV33cg+rJo3nYiyP9oZMZF0dR\niaBhUc4qCQ+GRM57TEdr+UXKxmGkayA0T2nE6J91gxSYFryB3KF6kMBTiXfbJg1W\nx4pUPF7kWsmNIUp3r8yzBY1hzesPetwBwVKZBJAL4tr4LBeJyQvlZ4Hnbi/qIWEe\nNAEHi7tNkwKBgQChQZx+zLqM51t0WD9aSk9xfGPUejXbpMq5gHjgeW1eiali0pnp\nkOoeiPtNlrL/oDcij1IDJ82CIWvWEZRuyJxQ8uMEng2qd/kynwIK3wXnlvYrGmGL\nBtBJYDRaqV+W07vI6nIiNfFaUkIfsL71CpLxPcTA83ejeU5cyhyYnOcMZwKBgC4v\nuODsqWKt55ImKHVop9ucm/PfT6STrCAFcSUgZeTygA6dSxVgAKam4Qa0rmV9Rhil\nY0rjzLiZYrZcQgrh7YMOSl9LmrvOG6naeiU+K4M/uTxaKklMWVJwSQ2peXvXDu5S\nYcZg0f3sG8VjY7dMnqMOMKs3HBSljBlcTnMeHZCDAoGBAKcs3zLyA+2jzEQhy+fM\ngQLW90GOM6vks+682wUkTlw0vrnsp26jPrCQJ0xh4mMM+XrLkkDlYL101jpQE8/6\nhLFd06adn2mEQDkJn1hc7HKIQ/Ck4L4qvqXaDoxEGFt113v+1OE6mnH9+AjVaF96\nF9/+1UcOjH2t1R3Qs+cl6O36\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-kowyf@quantitativetoolsdatabase.iam.gserviceaccount.com",
+  "client_id": "106225466647775497487",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-kowyf%40quantitativetoolsdatabase.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
