@@ -7,8 +7,6 @@ import datetime
 import utils
 import pandas as pd
 
-print("Hello", utils.getEnvValue('FIREBASE_PROJECT_ID'))
-
 cred = credentials.Certificate( {
     "project_id": utils.getEnvValue('FIREBASE_PROJECT_ID'),
     "private_key": utils.getEnvValue('FIREBASE_PRIVATE_KEY'),
