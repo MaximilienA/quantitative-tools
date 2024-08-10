@@ -4,14 +4,13 @@ from firebase_admin import db
 from firebase_admin import auth
 import streamlit as st
 import datetime
-from utils import getEnvValue
+import utils
 import pandas as pd
 
-print(getEnvValue('FIREBASE_CLIENT_MAIL'))
 cred = credentials.Certificate( {
-    "project_id": getEnvValue('FIREBASE_PROJECT_ID'),
-    "private_key": getEnvValue('FIREBASE_PRIVATE_KEY'),
-    "client_email": getEnvValue('FIREBASE_CLIENT_MAIL'),
+    "project_id": utils.getEnvValue('FIREBASE_PROJECT_ID'),
+    "private_key": utils.getEnvValue('FIREBASE_PRIVATE_KEY'),
+    "client_email": utils.getEnvValue('FIREBASE_CLIENT_MAIL'),
     "type": "service_account",
     "token_uri": "https://oauth2.googleapis.com/token",
 })
