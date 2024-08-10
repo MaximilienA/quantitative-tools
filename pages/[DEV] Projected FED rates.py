@@ -20,6 +20,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
+from firebase_admin import db
+
 import schedule
 
 import backend.database
@@ -120,3 +122,16 @@ def my_function():
 
 if st.button("Start data scrapping and upload data to database"):
     startBackgroundScrapping()
+
+def query_data_by_date(input_date):
+    database_path = "/scrapped_FED_rates/" + str(input_date)
+    print(database_path)
+    ref = db.reference(database_path)
+    result = ref.get()
+    result = pd.Series(result)
+    return result 
+        
+st.write(query_data_by_date('2024-08-10'))
+
+df_buffer_scrapped_data_from_website = query_data_by_date('2024-08-10')
+df_buffer_scrapped_data_from_website
