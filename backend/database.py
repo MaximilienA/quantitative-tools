@@ -4,10 +4,19 @@ from firebase_admin import db
 from firebase_admin import auth
 import streamlit as st
 import datetime
-
+from utils import getEnvValue
 import pandas as pd
 
-cred = credentials.Certificate('backend/quantitativetoolsdatabase-90b51ea9a1ca.json')
+print(getEnvValue('FIREBASE_CLIENT_MAIL'))
+cred = credentials.Certificate( {
+    "project_id": getEnvValue('FIREBASE_PROJECT_ID'),
+    "private_key": getEnvValue('FIREBASE_PRIVATE_KEY'),
+    "client_email": getEnvValue('FIREBASE_CLIENT_MAIL'),
+    "type": "service_account",
+    "token_uri": "https://oauth2.googleapis.com/token",
+})
+
+    #'backend/quantitativetoolsdatabase-90b51ea9a1ca.json')
 if not firebase_admin._apps:
     default_app = firebase_admin.initialize_app(cred, {"databaseURL" : "https://quantitativetoolsdatabase-default-rtdb.europe-west1.firebasedatabase.app/"})
 

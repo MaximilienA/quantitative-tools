@@ -1,2 +1,6 @@
 /backend/quantitativetoolsdatabase-90b51ea9a1ca.json
 utils.py
+.env
+
+/__pycache__
+/backend/__pycache__
