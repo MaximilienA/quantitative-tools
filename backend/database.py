@@ -39,9 +39,26 @@ def insertdata(scrapped_data, date):
         # st.write(dataDict)
         ref.set(dataDict)
 
-today = datetime.date.today()
-today = today.strftime("%Y-%m-%d")
+def query_data_by_date(input_date):
+    database_path = "/scrapped_FED_rates/" + str(input_date)
+    print(database_path)
+    ref = db.reference(database_path)
+    result = ref.get()
+    result = pd.Series(result)
+    return result 
+
+
+def get_all_dates():
+    dates = []
+    database_path = "/scrapped_FED_rates/"
+    ref = db.reference(database_path)
+    data = ref.get()
+    # for value in data.items():
+        # dates.append(value['date'])
+    return data
+
+
 
 # def get(data)
 
-# st.write(ref.get()) 
+# st.write(ref.get())

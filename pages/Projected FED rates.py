@@ -120,7 +120,9 @@ def get_probabilities():
     driver_Click.quit()
     driver.quit()
     df = pd.melt(df, value_vars=df.columns)
+    st.write(df)
     result_df = df['value']
+    st.write(result_df)
     return result_df
 
 # df_scrapped_data_from_website = get_probabilities()
@@ -211,10 +213,8 @@ def dfRatesMerger():
         #Format final table
         Rates_df.rename(columns={'Percentage': Date_of_specific_meeting_date}, inplace=True)
         Rates_df = Rates_df.fillna("0,0%")
-
     Rates_df.replace('0,0%', 0, inplace=True)
     Rates_df = (Rates_df.loc[(Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1) | (Rates_df[[Rates_df.columns[0]]]!= 0).all(axis=1)]).T
-
     Rates_df.columns = Rates_df.iloc[0]
     Rates_df = Rates_df.iloc[1:]         
     return Rates_df
@@ -222,11 +222,10 @@ def dfRatesMerger():
 final_df = dfRatesMerger()
 
 
-
 final_scrapped_df = final_df
 
 dataframe_from_database = final_scrapped_df
-
+st.write((type(dataframe_from_database)))
 #Map function to replace European percentage type values in decimal type values : the percentage '65.0%' will be converted to '68.5 and '0,00' will be converted to '0'
 def convert_percentage(x):
     if isinstance(x, str):
@@ -266,7 +265,8 @@ def convertRateRanges(dataframe_from_database):
 def transformReworkedDataframeToDisplayableDataframe(dataframe_from_database):
     #Replace European percentage type values in decimal type values 
     dataframe_from_database = dataframe_from_database.map(convert_percentage)
-
+    print(type(dataframe_from_database))
+    
     #Convert all percentages probabilities to float64
     for col in dataframe_from_database.columns:
         if pd.api.types.is_numeric_dtype(dataframe_from_database[col]):
