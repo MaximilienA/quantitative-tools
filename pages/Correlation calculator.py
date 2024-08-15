@@ -10,6 +10,10 @@ import plotly.graph_objects as go
 
 # import backend.database
 
+st.set_page_config(
+    layout="wide",  # Utiliser 'wide' pour une mise en page large
+)
+
 st.write("# Correlation graph")
 st.markdown(
     """
@@ -37,8 +41,8 @@ def get_first_day_of_stock_price(tickerA, tickerB):
     data = yf.download(tickerB, period="max")
     first_day_of_tickerB = data.index[0]
 
-    print("first_day_of_tickerA : ", first_day_of_tickerA, "first_day_of_tickerB", first_day_of_tickerB, "\n")
-    print("Number of days returned", min((datetime.date.today() - first_day_of_tickerA.date()).days, (datetime.date.today() - first_day_of_tickerB.date()).days))
+    # print("first_day_of_tickerA : ", first_day_of_tickerA, "first_day_of_tickerB", first_day_of_tickerB, "\n")
+    # print("Number of days returned", min((datetime.date.today() - first_day_of_tickerA.date()).days, (datetime.date.today() - first_day_of_tickerB.date()).days))
     return min((datetime.date.today() - first_day_of_tickerA.date()).days, (datetime.date.today() - first_day_of_tickerB.date()).days)
 
 #FUNCTION THAT RETURNS THE TABLE OF DATES AND CORRELATIONS
@@ -196,8 +200,8 @@ def correlation_computer(number_days, indexNameA, indexNameB):
         for i in range(len(merge)-1):
             if merge['daily_return_assetB'].iloc[i] == 0 :
                 merge['daily_return_assetB'].iloc[i] = merge['daily_return_assetB'].iloc[i+1]
-    print("len(merge)", len(merge))         
-    print("merge7", merge)
+    # print("len(merge)", len(merge))         
+    # print("merge7", merge)
     #INITIALIZE ONE SERIE FOR DATES AND ONE FOR CORRELATION COEFFICIENT r_price
     liste_r_price = pd.Series(dtype = 'float64')
     liste_end_date = pd.Series(dtype = 'datetime64[ns]')
@@ -243,15 +247,23 @@ def correlation_computer(number_days, indexNameA, indexNameB):
     # print(type(table_to_display))
     # print(table_to_display.index)
 
-    print("Final table : ", table_to_display)
+    # print("Final table : ", table_to_display)
     return table_to_display
 
 #DISPLAY GRAP ON WEBPAGE WITH STREAMLIT
 #run in a classic VSC terminal : "streamlit run c:\Users\pluto\Desktop\Investissement\Python\Correlation\Version-steamlit.py".
 index_name_list = df_index_name["Index_name"].tolist()
-selected_name = st.selectbox("Select first index", index_name_list, index = 2)
-selected_nameB = st.selectbox("Select second index", index_name_list, index = 9)
-print("selected_name", selected_name, " ", selected_nameB)
+
+col1, col2 = st.columns([1, 1]) 
+
+with col1:
+    selected_name = st.selectbox("Select first index", index_name_list, index = 2)
+
+    
+with col2:
+    selected_nameB = st.selectbox("Select second index", index_name_list, index = 9)
+
+# print("selected_name", selected_name, " ", selected_nameB)
 #CALL THE FUNCTION TO RETRIEVE DATE AND COMPUTE CORRELATIONS
 # number_of_days = get_first_day_of_stock_price(df_index_name[df_index_name.Index_name == selected_name].Index_symbol.values[0], df_index_name[df_index_name.Index_name == selected_nameB].Index_symbol.values[0])
 number_of_days = 1000
@@ -264,6 +276,8 @@ fig.update_layout(
     title=selected_name + " - " + selected_nameB +  " 30 days correlation" + " (last " + str(number_of_days)+ " days )",
     xaxis=dict(title='Date'),
     yaxis=dict(title='Correlation'),
+    width=1200,  
+    height=500,
 )
 fig.update_layout(xaxis_rangeslider_visible=True)
 

@@ -26,6 +26,10 @@ import schedule
 
 import backend.database
 
+st.set_page_config(
+    layout="wide",  # Utiliser 'wide' pour une mise en page large
+)
+
 st.write("# Projected FED rates")
 
 # ===== FUNCTION THAT OPEN THE BASE WEBPAGE IN A SIMULATED HEADLESS FIREFOX WINDOW AND RETURNS THE VALUES IN THE TABLE =====
@@ -133,16 +137,20 @@ dates_list = backend.database.get_all_dates()
 dict1 = (list(dates_list.keys()))
 dict2 = (list(dates_list.keys()))
 
-date1 = st.selectbox(
-    'Choose first date',
-    list(dict1),  # Utiliser les clés du dictionnaire comme options
-    key='selectbox_date1'
-)
+col1, col2 = st.columns([1, 1]) 
 
-date2 = st.selectbox(
-    'Choose second date',
-    list(dict2),  # Utiliser les clés du dictionnaire comme options
-        key='selectbox_date2'
+with col1:
+    date1 = st.selectbox(
+        'Choose first date',
+        list(dict1), 
+        key='selectbox_date1'
+        )
+    
+with col2:
+    date2 = st.selectbox(
+        'Choose second date',
+        list(dict2), 
+            key='selectbox_date2'
 )
 
 # Get collection names
@@ -507,12 +515,14 @@ df_to_display_in_graph2 = transformReworkedDataframeToDisplayableDataframe(dataf
 # ===== PYPLOT =====
 # Create the line graph
 plt.figure(figsize=(16, 6))
-plt.plot(df_to_display_in_graph1.index, df_to_display_in_graph1['Upper range rate'], marker='o', linestyle='-')
-plt.plot(df_to_display_in_graph2.index, df_to_display_in_graph2['Upper range rate'], marker='o', linestyle='-')
+plt.plot(df_to_display_in_graph1.index, df_to_display_in_graph1['Upper range rate'], marker='o', linestyle='-', label = date1)
+plt.plot(df_to_display_in_graph2.index, df_to_display_in_graph2['Upper range rate'], marker='o', linestyle='-', label = date2)
 plt.xlabel('Meeting dates')
 plt.ylabel('Upper range rate')
 plt.title('Projected FED rates for upcoming meeting dates')
 plt.grid(True)
+
+plt.legend()
 
 # Scale Y axis by 0.25
 def make_increment(start, end, num_steps):
