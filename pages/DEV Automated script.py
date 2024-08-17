@@ -23,6 +23,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
 from firebase_admin import db
+from utils import getEnvValue
 
 import schedule
 
@@ -92,9 +93,11 @@ def get_probabilities():
     backend.database.insertdata(result_df,today)
     return 0
 
-print(st.context.headers.get_all('API-token'))
+print(st.context.headers.get_all('API-Token')[0])
 
-if(not st.context.headers.get_all('API-token') ):
+if(not st.context.headers.get_all('API-Token') ):
     st.write('You are not authorized to access this page. Come back later.')
-else: 
+elif(st.context.headers.get_all('API-Token')[0] != getEnvValue('API-Token')): 
+    st.write('You are not authorized to access this page. Come back later.')
+else:   
     get_probabilities()
