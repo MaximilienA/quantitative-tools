@@ -27,6 +27,7 @@ LOGGER = get_logger(__name__)
 
 
 def run():
+    LOGGER.info('JE NE SAIS OPAS IJDGBUGHYQVUHDGVQHUBDJHQBDHUJBQHJD')
     st.set_page_config(
         page_title="Quantitative tools",
         page_icon="👋",
