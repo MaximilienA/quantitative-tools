@@ -93,8 +93,6 @@ def get_probabilities():
     backend.database.insertdata(result_df,today)
     return 0
 
-print(st.context.headers.get_all('API-Token')[0])
-
 if(not st.context.headers.get_all('API-Token') ):
     st.write('You are not authorized to access this page. Come back later.')
 elif(st.context.headers.get_all('API-Token')[0] != getEnvValue('API-Token')): 
