@@ -95,8 +95,11 @@ def get_probabilities():
     return 0
 
 if(not st.context.headers.get_all('API-Token') ):
+    print("Ici")
     st.write('You are not authorized to access this page. Come back later.')
 elif(st.context.headers.get_all('API-Token')[0] != getEnvValue('API-Token')): 
+    print("La")
     st.write('You are not authorized to access this page. Come back later.')
 else:   
+    print("Par ici")
     get_probabilities()
