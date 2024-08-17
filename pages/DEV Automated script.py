@@ -32,6 +32,7 @@ import backend.database
 
 
 def get_probabilities():
+    print("Data scrapping stated")
     options = Options()
     options.add_argument('--headless')
 
