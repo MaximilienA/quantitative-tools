@@ -591,9 +591,6 @@ def create_plot(df_to_display_in_graph1, df_to_display_in_graph2):
     # Show the plot
     pio.show(fig)
 
-
-
-
 # Assume the date columns have already been converted to datetime
 df_to_display_in_graph1.index = pd.to_datetime(df_to_display_in_graph1.index, format='%m/%d/%Y')
 df_to_display_in_graph2.index = pd.to_datetime(df_to_display_in_graph2.index, format='%m/%d/%Y')
@@ -606,6 +603,6 @@ df1_reindexed = df_to_display_in_graph1.reindex(combined_dates)
 df2_reindexed = df_to_display_in_graph2.reindex(combined_dates)
 
 # Create the plot using Plotly
-create_plot(df1_reindexed, df2_reindexed)
+# create_plot(df1_reindexed, df2_reindexed)
 
-st.pyplot(plt)
+st.pyplot(create_plot(df1_reindexed, df2_reindexed))
