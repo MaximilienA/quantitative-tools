@@ -512,27 +512,98 @@ df_to_display_in_graph2 = transformReworkedDataframeToDisplayableDataframe(dataf
 
 # df_to_display_in_graph1
 
-# ===== PYPLOT =====
-# Create the line graph
-plt.figure(figsize=(16, 6))
-plt.plot(df_to_display_in_graph1.index, df_to_display_in_graph1['Upper range rate'], marker='o', linestyle='-', label = date1)
-plt.plot(df_to_display_in_graph2.index, df_to_display_in_graph2['Upper range rate'], marker='o', linestyle='-', label = date2)
-plt.xlabel('Meeting dates')
-plt.ylabel('Upper range rate')
-plt.title('Projected FED rates for upcoming meeting dates')
-plt.grid(True)
+# # ===== PYPLOT =====
+# # Create the line graph
+# plt.figure(figsize=(16, 6))
+# plt.plot(df_to_display_in_graph1.index, df_to_display_in_graph1['Upper range rate'], marker='o', linestyle='-', label = date1)
+# plt.plot(df_to_display_in_graph2.index, df_to_display_in_graph2['Upper range rate'], marker='o', linestyle='-', label = date2)
+# plt.xlabel('Meeting dates')
+# plt.ylabel('Upper range rate')
+# plt.title('Projected FED rates for upcoming meeting dates')
+# plt.grid(True)
 
-plt.legend()
+# plt.legend()
 
-# Scale Y axis by 0.25
-def make_increment(start, end, num_steps):
-    return [start + i * (end - start) / (num_steps - 1) for i in range(num_steps)]
+# # Scale Y axis by 0.25
+# def make_increment(start, end, num_steps):
+#     return [start + i * (end - start) / (num_steps - 1) for i in range(num_steps)]
 
-max_value = df_to_display_in_graph1['Upper range rate'].max()
-min_value = df_to_display_in_graph1['Upper range rate'].min()
-increment_values = make_increment(max_value+0.25, min_value-0.25, int((max_value-min_value)/0.25)+3)
-plt.gca().set_yticks(increment_values)
+# max_value = df_to_display_in_graph1['Upper range rate'].max()
+# min_value = df_to_display_in_graph1['Upper range rate'].min()
+# increment_values = make_increment(max_value+0.25, min_value-0.25, int((max_value-min_value)/0.25)+3)
+# plt.gca().set_yticks(increment_values)
 
-plt.show()
+# plt.show()
+
+def generate_yticks(df1, df2):
+    # Generate y-tick values scaled by 0.25
+    max_value1 = df1['Upper range rate'].max()
+    min_value1 = df1['Upper range rate'].min()
+    max_value2 = df2['Upper range rate'].max()
+    min_value2 = df2['Upper range rate'].min()
+    
+    max_value = max(max_value1, max_value2)
+    min_value = min(min_value1, min_value2)
+    
+    step = 0.25
+    num_steps = int((max_value - min_value) / step) + 3
+    return [min_value + i * step for i in range(num_steps)]
+
+# Create the line graph using Plotly
+def create_plot(df_to_display_in_graph1, df_to_display_in_graph2):
+    # Initialize a Plotly figure
+    fig = go.Figure()
+
+    # Add traces for each dataframe
+    fig.add_trace(go.Scatter(
+        x=df_to_display_in_graph1.index, 
+        y=df_to_display_in_graph1['Upper range rate'], 
+        mode='lines+markers', 
+        name='DF1 Upper range rate'
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=df_to_display_in_graph2.index, 
+        y=df_to_display_in_graph2['Upper range rate'], 
+        mode='lines+markers', 
+        name='DF2 Upper range rate'
+    ))
+
+    # Set axis labels and title
+    fig.update_layout(
+        title='Projected Rates',
+        xaxis_title='Date',
+        yaxis_title='Upper range rate',
+        xaxis=dict(tickangle=-45),
+        yaxis=dict(tickvals=generate_yticks(df_to_display_in_graph1, df_to_display_in_graph2)),
+        showlegend=True
+    )
+
+    # Update the x-axis to only display valid dates (where Y values exist)
+    valid_dates_df1 = df_to_display_in_graph1.dropna().index
+    valid_dates_df2 = df_to_display_in_graph2.dropna().index
+    valid_dates = valid_dates_df1.union(valid_dates_df2)
+    
+    fig.update_xaxes(tickvals=valid_dates)
+
+    # Show the plot
+    pio.show(fig)
+
+
+
+
+# Assume the date columns have already been converted to datetime
+df_to_display_in_graph1.index = pd.to_datetime(df_to_display_in_graph1.index, format='%m/%d/%Y')
+df_to_display_in_graph2.index = pd.to_datetime(df_to_display_in_graph2.index, format='%m/%d/%Y')
+
+# Combine the two date indexes, sort them in chronological order, and reindex both dataframes
+combined_dates = df_to_display_in_graph1.index.union(df_to_display_in_graph2.index).sort_values()
+
+# Reindex both dataframes to the combined dates
+df1_reindexed = df_to_display_in_graph1.reindex(combined_dates)
+df2_reindexed = df_to_display_in_graph2.reindex(combined_dates)
+
+# Create the plot using Plotly
+create_plot(df1_reindexed, df2_reindexed)
 
 st.pyplot(plt)
