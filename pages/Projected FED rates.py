@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
 import time
+import plotly.io as pio
+
 
 import pandas as pd
 import plotly.graph_objects as go
