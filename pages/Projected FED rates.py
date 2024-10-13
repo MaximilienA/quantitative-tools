@@ -537,10 +537,10 @@ df_to_display_in_graph2 = transformReworkedDataframeToDisplayableDataframe(dataf
 
 # ===== PYPLOT =====
 # Create the line graph
-def createPlot(df_to_display_in_graph1, df_to_display_in_graph2, dataframe_from_database1, dataframe_from_database2):
+def createPlot(df_to_display_in_graph1, df_to_display_in_graph2, date1, date2):
     plt.figure(figsize=(16, 6))
-    plt.plot(df_to_display_in_graph1.index, df_to_display_in_graph1['Upper range rate'], marker='o', linestyle='-', label = dataframe_from_database1)
-    plt.plot(df_to_display_in_graph2.index, df_to_display_in_graph2['Upper range rate'], marker='o', linestyle='-', label = dataframe_from_database2)
+    plt.plot(df_to_display_in_graph1.index, df_to_display_in_graph1['Upper range rate'], marker='o', linestyle='-', label = date1)
+    plt.plot(df_to_display_in_graph2.index, df_to_display_in_graph2['Upper range rate'], marker='o', linestyle='-', label = date2)
     
     # plt.plot(df_to_display_in_graph.index, df_to_display_in_graph['Average'], marker='o', linestyle='--')
     plt.xlabel('Date')
@@ -590,6 +590,6 @@ combined_dates = df_to_display_in_graph1.index.union(df_to_display_in_graph2.ind
 df1_reindexed = df_to_display_in_graph1.reindex(combined_dates)
 df2_reindexed = df_to_display_in_graph2.reindex(combined_dates)
 
-plt = createPlot(df1_reindexed, df2_reindexed, dataframe_from_database1, dataframe_from_database2)
+plt = createPlot(df1_reindexed, df2_reindexed, date1, date2)
 
 st.pyplot(plt)
