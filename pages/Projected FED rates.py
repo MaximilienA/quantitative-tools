@@ -546,7 +546,7 @@ def createPlot(df_to_display_in_graph1, df_to_display_in_graph2):
     plt.xlabel('Date')
     plt.ylabel('Upper range rate')
     plt.title('Projected rates')
-    
+    plt.grid(True)
     
 
     # Scale Y axis by 0.25
@@ -577,7 +577,7 @@ def createPlot(df_to_display_in_graph1, df_to_display_in_graph2):
 
     plt.xticks(rotation=45)
 
-    plt.grid(True)
+    plt.legend()
 
     return plt
 
