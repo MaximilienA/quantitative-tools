@@ -577,8 +577,6 @@ def createPlot(df_to_display_in_graph1, df_to_display_in_graph2):
 
     plt.xticks(rotation=45)
 
-    plt.legend()
-
     return plt
 
 df_to_display_in_graph1.index = pd.to_datetime(df_to_display_in_graph1.index, format='%m/%d/%Y')
