@@ -2,7 +2,7 @@
 import pandas as pd
 import datetime as dt
 import datetime
-import yfinance as yf   
+# import yfinance as yf   
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
@@ -593,3 +593,4 @@ df2_reindexed = df_to_display_in_graph2.reindex(combined_dates)
 plt = createPlot(df1_reindexed, df2_reindexed, date1, date2)
 
 st.pyplot(plt)
+
