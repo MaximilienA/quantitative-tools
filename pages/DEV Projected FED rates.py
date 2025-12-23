@@ -2,7 +2,7 @@
 import pandas as pd
 import datetime as dt
 import datetime
-import yfinance as yf   
+# import yfinance as yf   
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
@@ -122,4 +122,5 @@ def my_function():
     st.write("Button clicked!") 
 
 if st.button("Start data scrapping and upload data to database"):
+
     startBackgroundScrapping()
