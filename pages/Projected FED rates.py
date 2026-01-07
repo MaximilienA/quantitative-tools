@@ -134,24 +134,42 @@ def startBackgroundScrapping():
 
 dates_list = backend.database.get_all_dates()
 
+dates_sorted = sorted(dates_list.keys(), reverse=True)
+
 dict1 = (list(dates_list.keys()))
 dict2 = (list(dates_list.keys()))
 
 col1, col2 = st.columns([1, 1]) 
 
+# with col1:
+#     date1 = st.selectbox(
+#         'Choose first date',
+#         list(dict1), 
+#         key='selectbox_date1'
+#         )
+    
+# with col2:
+#     date2 = st.selectbox(
+#         'Choose second date',
+#         list(dict2), 
+#             key='selectbox_date2'
+# )
+
 with col1:
     date1 = st.selectbox(
         'Choose first date',
-        list(dict1), 
+        dates_sorted,
+        index=0,  # most recent date
         key='selectbox_date1'
-        )
-    
+    )
+
 with col2:
     date2 = st.selectbox(
         'Choose second date',
-        list(dict2), 
-            key='selectbox_date2'
-)
+        dates_sorted,
+        index=1 if len(dates_sorted) > 1 else 0,  # second most recent
+        key='selectbox_date2'
+    )
 
 # Get collection names
 # collection_names = get_all_collection_names()
