@@ -1,7 +1,7 @@
 pandas
 datetime
 timedelta
-yfinance
+yfinance==0.2.66
 numpy
 streamlit==1.37.1
 plotly
