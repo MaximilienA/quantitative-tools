@@ -33,12 +33,7 @@ st.set_page_config(
 st.write("# Projected FED rates")
 st.markdown(
     """
-    ##### Scrapping CME's FedWatch tool probabilities data, displaying probabilities of rate changes for the upcoming FED meeting dates and comparing them to previous data. Helpful to understand changes in market's expectations regarding the FED's future decisions
-    """
-)
-st.markdown(
-    """
-    ##### .
+    ##### Scrapping CME's FedWatch tool probabilities data, displaying probabilities of rate changes for the upcoming FED meeting dates and comparing them to previous data. Helpful to understand changes in market's expectations regarding the FED's future decisions.
     """
 )
 
