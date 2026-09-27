@@ -225,11 +225,13 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
     percentages = date_percentages_clean[1:]
 
     #Adjust the lenght of the first probabilities row (next date's probabilities)  to the lenght of the header row : "MEETING DATE 325-350 350-375 375-400 400-425 4..."
-    while (len(percentages) != len(data_headers_clean[1:])):
-        percentages.insert(0, "0,0%")  
+    rate_headers = data_headers_clean[1:]
+    if len(percentages) > len(rate_headers):
+        raise ValueError("More probabilities than rate headers")
+    percentages.extend(["0,0%"] * (len(rate_headers) - len(percentages)))
     
     #Create a DataFrame
-    df = pd.DataFrame([percentages], columns=data_headers_clean[1:])
+    df = pd.DataFrame([percentages], columns=rate_headers)
     df = df.T
     df = df.reset_index()
     df.columns = ['Rates', 'Percentage']
@@ -392,11 +394,13 @@ def dataSlicer(data_headers_raw, data_probabilities_raw, index):
     percentages = date_percentages_clean[1:]
 
     #Adjust the lenght of the first probabilities row (next date's probabilities)  to the lenght of the header row : "MEETING DATE 325-350 350-375 375-400 400-425 4..."
-    while (len(percentages) != len(data_headers_clean[1:])):
-        percentages.insert(0, "0,0%")  
+    rate_headers = data_headers_clean[1:]
+    if len(percentages) > len(rate_headers):
+        raise ValueError("More probabilities than rate headers")
+    percentages.extend(["0,0%"] * (len(rate_headers) - len(percentages)))
     
     #Create a DataFrame
-    df = pd.DataFrame([percentages], columns=data_headers_clean[1:])
+    df = pd.DataFrame([percentages], columns=rate_headers)
     df = df.T
     df = df.reset_index()
     df.columns = ['Rates', 'Percentage']
