@@ -76,12 +76,26 @@ def get_probabilities():
     driver_Click.get(URL)
     driver_Click.implicitly_wait(1) 
     
-    #Click on the "Probabilities" component which ID is "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"
-    folder_Click = driver_Click.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree")
-    folder_Click.click()
-    
-    #Gives an implicit wait for 5 seconds so that the QuickStrike table can load
-    driver_Click.implicitly_wait(1) 
+    # Previous click attempt; this ID may match a hidden or non-interactable element.
+    # folder_Click = driver_Click.find_element(
+    #     By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"
+    # )
+    # folder_Click.click()
+
+    def find_visible_probabilities_link(browser):
+        for element in browser.find_elements(
+            By.XPATH, "//a[normalize-space()='Probabilities']"
+        ):
+            if element.is_displayed() and element.is_enabled():
+                return element
+        return False
+
+    wait = WebDriverWait(driver_Click, 20)
+    folder_Click = wait.until(find_visible_probabilities_link)
+    driver_Click.execute_script(
+        "arguments[0].scrollIntoView({block: 'center'});", folder_Click
+    )
+    wait.until(EC.element_to_be_clickable(folder_Click)).click()
 
     df = pd.DataFrame()
 
