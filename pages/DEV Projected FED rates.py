@@ -55,8 +55,10 @@ def get_probabilities():
     driver.get("https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html?redirect=/trading/interest-rates/countdown-to-fomc.html")
     driver.implicitly_wait(1) 
 
-    #Switch to frame "cmeIframe-jtxelq2f"
+    #Switch to frame "cmeIframe-jtxelq2f" updated on 2026 10 27 to id ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree
     driver.switch_to.frame(driver.find_element(By.ID, "cmeIframe-jtxelq2f"))
+    driver.switch_to.frame(driver.find_element(By.ID, "cctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"))
+
     driver.implicitly_wait(1) 
 
     #Find the element "Form1" -> corresponds to the Quickstrike window integrated to the website
