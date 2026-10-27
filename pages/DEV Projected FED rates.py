@@ -56,7 +56,7 @@ def get_probabilities():
     driver.implicitly_wait(1) 
 
     #Switch to frame "cmeIframe-jtxelq2f" updated on 2026 10 27 to id ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree
-    driver.switch_to.frame(driver.find_element(By.ID, "cmeIframe-jtxelq2f"))
+    # driver.switch_to.frame(driver.find_element(By.ID, "cmeIframe-jtxelq2f"))
     driver.switch_to.frame(driver.find_element(By.ID, "cctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"))
 
     driver.implicitly_wait(1) 
