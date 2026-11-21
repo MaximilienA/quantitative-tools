@@ -19,6 +19,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 
 from firebase_admin import db
 
@@ -124,7 +125,66 @@ def get_probabilities():
     backend.database.insertdata(result_df,today)
     return 0
 
+def get_probabilities_scrapping_new():
 
+    cme_url = "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool"
+
+    options = Options()
+    options.add_argument("--headless")
+    driver = webdriver.Firefox(options=options)
+
+    try:
+        wait = WebDriverWait(driver, 20)
+        driver.get(cme_url)
+
+        quikstrike_frame = (By.CSS_SELECTOR, "iframe[src*='cmegroup-tools.quikstrike.net']")
+        try:
+            WebDriverWait(driver, 5).until(
+                EC.frame_to_be_available_and_switch_to_it(quikstrike_frame)
+            )
+        except TimeoutException:
+            driver.switch_to.default_content()
+            print("QuikStrike iframe was not present; opening the embedded tool link instead.")
+            original_handles = set(driver.window_handles)
+            quikstrike_link = wait.until(EC.presence_of_element_located((
+                By.CSS_SELECTOR, ".iframe.block a[href*='QuikStrikeTools.aspx']"
+            )))
+            quikstrike_url = quikstrike_link.get_attribute("href")
+            if not quikstrike_url:
+                raise RuntimeError("The CME page's QuikStrike link has no href.")
+            driver.execute_script("window.open(arguments[0], '_blank');", quikstrike_url)
+            wait.until(lambda current_driver: len(set(current_driver.window_handles) - original_handles) > 0)
+            new_handle = next(handle for handle in driver.window_handles if handle not in original_handles)
+            driver.switch_to.window(new_handle)
+
+        probabilities_tab = wait.until(
+            EC.element_to_be_clickable((By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree"))
+        )
+        probabilities_tab.click()
+
+        probabilities_table_locator = (
+            By.XPATH,
+            "//table[.//th[contains(normalize-space(.), 'CME FedWatch Tool - Conditional Meeting Probabilities')]]"
+        )
+        table_text = WebDriverWait(
+            driver, 20, ignored_exceptions=(StaleElementReferenceException,)
+        ).until(
+            lambda current_driver: current_driver.find_element(*probabilities_table_locator).get_attribute("innerText")
+        )
+        rows = [
+            line.strip()
+            for line in table_text.splitlines()
+            if line.strip() and not line.strip().startswith("CME FEDWATCH TOOL")
+        ]
+
+        serie_to_return = pd.Series(rows, name="value", dtype=object)
+        print(serie_to_return)
+
+        return serie_to_return
+    
+    finally:
+        driver.quit()
+# get_probabilities_scrapping_new()
 
 # Run the scheduler indefinitely
 def startBackgroundScrapping():
@@ -132,7 +192,7 @@ def startBackgroundScrapping():
     # schedule.run_pending()
     #     time.sleep(1)
     # schedule.every(1).day.do(get_probabilities)
-    get_probabilities()
+    get_probabilities_scrapping_new()
 
 def my_function():
     st.write("Button clicked!") 
