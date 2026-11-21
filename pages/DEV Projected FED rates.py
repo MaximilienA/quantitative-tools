@@ -126,7 +126,7 @@ def get_probabilities():
     return 0
 
 def get_probabilities_scrapping_new():
-
+    print("Starting data scrapping...")
     cme_url = "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool"
 
     options = Options()
