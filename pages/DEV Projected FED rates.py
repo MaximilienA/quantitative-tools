@@ -198,5 +198,5 @@ def my_function():
     st.write("Button clicked!") 
 
 if st.button("Start data scrapping and upload data to database"):
-
+    my_function()
     startBackgroundScrapping()
