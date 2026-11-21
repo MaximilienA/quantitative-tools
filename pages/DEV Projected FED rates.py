@@ -126,7 +126,7 @@ def get_probabilities():
     return 0
 
 def get_probabilities_scrapping_new():
-    print("Starting data scrapping...")
+    st.write("In get_probabilities_scrapping_new()")
     cme_url = "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool"
 
     options = Options()
@@ -188,6 +188,7 @@ def get_probabilities_scrapping_new():
 
 # Run the scheduler indefinitely
 def startBackgroundScrapping():
+    print("Starting background scrapping")
     # while True:
     # schedule.run_pending()
     #     time.sleep(1)
